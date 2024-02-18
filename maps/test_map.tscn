@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bboibipxo6flu"]
 
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
-[ext_resource type="PackedScene" uid="uid://bdhv2ekb58y2y" path="res://assets/models/track_01.glb" id="2_6jibo"]
+[ext_resource type="PackedScene" uid="uid://dfnggqdwkl07a" path="res://assets/models/track_01.glb" id="2_6jibo"]
 
 [node name="TestMap" type="Node3D"]
 

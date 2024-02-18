@@ -1,5 +1,6 @@
 extends Node
 
+var map_scene = preload("res://maps/test_map.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,6 +11,8 @@ func _ready():
 	multiplayer.connected_to_server.connect(_on_connected_ok)
 	multiplayer.connection_failed.connect(_on_connected_fail)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
+	var map_instance = map_scene.instantiate()
+	add_child(map_instance)
 
 func _on_player_connected(id):
 	if multiplayer.is_server():
