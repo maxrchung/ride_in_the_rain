@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bboibipxo6flu"]
+[gd_scene load_steps=18 format=3 uid="uid://bboibipxo6flu"]
 
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
@@ -6,12 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://djytkt442qiqt" path="res://icon.svg" id="4_8if12"]
 [ext_resource type="Script" path="res://maps/minimap.gd" id="5_ey4rv"]
 [ext_resource type="PackedScene" uid="uid://cy54or8degxgl" path="res://assets/models/track_dev.glb" id="6_pcrmm"]
+[ext_resource type="Texture2D" uid="uid://cdqnmaxdommg5" path="res://assets/skybox/whipple_creek_regional_park_04_4k.exr" id="7_4ydi2"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sw86o"]
-emission_shape_offset = Vector3(0, 16, 0)
+emission_shape_offset = Vector3(0, 8, 0)
 emission_shape = 3
-emission_box_extents = Vector3(16, 0, 16)
+emission_box_extents = Vector3(32, 0, 64)
 direction = Vector3(0, -1, 0)
+initial_velocity_min = 32.0
+initial_velocity_max = 32.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2c04q"]
 transparency = 3
@@ -43,6 +46,17 @@ size = Vector3(33.6801, 41.8364, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_0pe7u"]
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a0xp4"]
+panorama = ExtResource("7_4ydi2")
+
+[sub_resource type="Sky" id="Sky_kgvh6"]
+sky_material = SubResource("PanoramaSkyMaterial_a0xp4")
+
+[sub_resource type="Environment" id="Environment_xjsex"]
+background_mode = 2
+background_energy_multiplier = 0.1
+sky = SubResource("Sky_kgvh6")
+
 [node name="TestMap" type="Node3D"]
 script = ExtResource("1_0a3d1")
 
@@ -53,10 +67,14 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 46.684
 transform = Transform3D(-1, 8.6572e-08, -1.21669e-08, 0, 0.139173, 0.990268, 8.74228e-08, 0.990268, -0.139173, 0, 12.45, -1)
 
 [node name="Rain" type="GPUParticles3D" parent="Bicycle/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
-amount = 5000
-lifetime = 5.0
-preprocess = 1.0
+transform = Transform3D(1, 0, 0, 0, 0.173648, -0.984808, 0, 0.984808, 0.173648, 0, 48, 0)
+layers = 2
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+amount = 50000
+lifetime = 2.0
+preprocess = 3.0
+fixed_fps = 15
 process_material = SubResource("ParticleProcessMaterial_sw86o")
 draw_pass_1 = SubResource("SphereMesh_qccq2")
 
@@ -211,6 +229,7 @@ render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="TextureRect/SubViewportContainer/SubViewport"]
 transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, 46.684, 12.45, 42.851)
+cull_mask = 1048573
 projection = 1
 script = ExtResource("5_ey4rv")
 follow_scan_radius = 100.0
@@ -219,6 +238,9 @@ player_rotation_target = NodePath("../../../../Bicycle")
 
 [node name="track_dev" parent="." instance=ExtResource("6_pcrmm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.0864)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xjsex")
 
 [connection signal="pressed" from="WinUi/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
 [connection signal="pressed" from="WinUi/LeaveButton" to="." method="_on_leave_button_pressed"]
