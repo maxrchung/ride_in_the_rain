@@ -1,13 +1,7 @@
 extends Node
 
+# This is a list of unique IDs assigned by Godot's peer management.
+# I am using a singleton because it is shared across Start asnd Game
+# scenes. Order is determined by when the peer joined, last means
+# later. You can check your own ID by using multiplayer.get_unique_id()
 var players = []
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

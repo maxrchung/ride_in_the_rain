@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://start.gd" id="1_u02kx"]
 
-[node name="Start" type="CanvasLayer"]
+[node name="Game" type="CanvasLayer"]
 script = ExtResource("1_u02kx")
 
 [node name="CreateButton" type="Button" parent="."]

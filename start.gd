@@ -41,6 +41,7 @@ func create_game():
 # Server manages and tells everyone about player updates
 @rpc("authority", "call_local")
 func update_players(new_players):
+	print("update_players ", new_players)
 	GlobalCrap.players = new_players
 	var list = GlobalCrap.players.map(map_player_you)
 	$PlayersCount.text = "Players:\n" + "\n".join(list)
@@ -93,7 +94,7 @@ func _on_create_button_pressed():
 func _on_join_button_pressed():
 	join_game()
 
-@rpc("call_local", "reliable")
+@rpc("call_local")
 func load_game():
 	get_tree().change_scene_to_file("game.tscn")
 
@@ -110,3 +111,7 @@ func _on_leave_button_pressed():
 	$LeaveButton.hide()
 	$StartButton.hide()
 	$PlayersCount.hide()
+
+@rpc
+func update_game(data):
+	get_tree().change_scene_to_file("game.tscn")
