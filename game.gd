@@ -47,13 +47,11 @@ func _on_server_disconnected():
 func _process(delta):
 	if multiplayer.is_server():
 		var time = str(Time.get_ticks_msec())
-		#print("Send: ", time)
 		update_game.rpc(time)
 
 @rpc
 func update_game(data):
 	pass
-	#print("Received: ", data)
 
 # ?????????????????? Why da fok do i need this? This is needed to match with
 # start.gd, do not touch.
