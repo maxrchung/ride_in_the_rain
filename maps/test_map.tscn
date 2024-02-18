@@ -1,12 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://bboibipxo6flu"]
+[gd_scene load_steps=8 format=3 uid="uid://bboibipxo6flu"]
 
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
 [ext_resource type="PackedScene" uid="uid://dfnggqdwkl07a" path="res://assets/models/track_01.glb" id="2_6jibo"]
 [ext_resource type="Texture2D" uid="uid://djytkt442qiqt" path="res://icon.svg" id="4_8if12"]
+[ext_resource type="Script" path="res://maps/minimap.gd" id="5_ey4rv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eigu5"]
 size = Vector3(33.6801, 41.8364, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0pe7u"]
 
 [node name="TestMap" type="Node3D"]
 script = ExtResource("1_0a3d1")
@@ -131,7 +134,7 @@ offset_left = 516.0
 offset_top = 280.0
 offset_right = 568.0
 offset_bottom = 303.0
-text = "FINISH"
+text = "FINISH!"
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 3.999
@@ -140,6 +143,31 @@ one_shot = true
 [node name="FinishTimer" type="Timer" parent="."]
 wait_time = 3.999
 one_shot = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 23.0
+offset_top = 431.0
+offset_right = 223.0
+offset_bottom = 631.0
+texture = SubResource("ViewportTexture_0pe7u")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="TextureRect"]
+layout_mode = 0
+offset_right = 200.0
+offset_bottom = 200.0
+
+[node name="SubViewport" type="SubViewport" parent="TextureRect/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(200, 200)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="TextureRect/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 1.74846e-07, -3.82137e-15, -3.82137e-15, 4.37114e-08, 1, 1.74846e-07, -1, 4.37114e-08, 46.684, 12.45, 42.851)
+projection = 1
+script = ExtResource("5_ey4rv")
+follow_scan_radius = 100.0
+player_target = NodePath("../../../../Bicycle")
 
 [connection signal="pressed" from="WinUi/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
 [connection signal="pressed" from="WinUi/LeaveButton" to="." method="_on_leave_button_pressed"]

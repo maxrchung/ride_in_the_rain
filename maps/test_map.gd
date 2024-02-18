@@ -13,7 +13,7 @@ func _process(delta):
 	if $StartTimer.time_left > 0:
 		var seconds = int($StartTimer.time_left)
 		if seconds == 0:
-			$Hud/StartLabel.text = "START"
+			$Hud/StartLabel.text = "Go!!"
 		else: 
 			$Hud/StartLabel.text = str(seconds)
 		
