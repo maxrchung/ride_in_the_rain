@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
-[ext_resource type="PackedScene" uid="uid://bdhv2ekb58y2y" path="res://assets/models/track_01.glb" id="2_6jibo"]
+[ext_resource type="PackedScene" uid="uid://dfnggqdwkl07a" path="res://assets/models/track_01.glb" id="2_6jibo"]
 [ext_resource type="Texture2D" uid="uid://djytkt442qiqt" path="res://icon.svg" id="4_8if12"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eigu5"]
@@ -117,8 +117,34 @@ offset_right = 229.0
 offset_bottom = 40.0
 text = "0"
 
+[node name="StartLabel" type="Label" parent="Hud"]
+visible = false
+offset_left = 497.0
+offset_top = 249.0
+offset_right = 537.0
+offset_bottom = 272.0
+text = "3"
+
+[node name="FinishLabel" type="Label" parent="Hud"]
+visible = false
+offset_left = 516.0
+offset_top = 280.0
+offset_right = 568.0
+offset_bottom = 303.0
+text = "FINISH"
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 3.999
+one_shot = true
+
+[node name="FinishTimer" type="Timer" parent="."]
+wait_time = 3.999
+one_shot = true
+
 [connection signal="pressed" from="WinUi/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
 [connection signal="pressed" from="WinUi/LeaveButton" to="." method="_on_leave_button_pressed"]
 [connection signal="pressed" from="LoseUi/TryAgainButton" to="." method="_on_try_again_button_pressed"]
 [connection signal="pressed" from="LoseUi/LeaveButton" to="." method="_on_leave_button_pressed"]
 [connection signal="body_entered" from="EndArea" to="." method="_on_end_area_body_entered"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="FinishTimer" to="." method="_on_finish_timer_timeout"]

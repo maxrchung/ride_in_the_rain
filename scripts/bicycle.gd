@@ -26,6 +26,11 @@ func _process(delta):
 	if GlobalCrap.players.size() != bikers.size():
 		resync_bikers.rpc()
 		
+	if get_node("../StartTimer").time_left > 0:
+		# Tell others about new position so people but don't actually update it below
+		update_bicycle.rpc(position, rotation, current_velocity)
+		return
+		
 	forward_vector = get_global_transform().basis.z
 	if Input.is_action_just_pressed("crash"):
 		crash()

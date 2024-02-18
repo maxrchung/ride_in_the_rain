@@ -10,6 +10,13 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if $StartTimer.time_left > 0:
+		var seconds = int($StartTimer.time_left)
+		if seconds == 0:
+			$Hud/StartLabel.text = "START"
+		else: 
+			$Hud/StartLabel.text = str(seconds)
+		
 	if multiplayer.is_server():
 		sync_start_time.rpc(start_time)
 	
@@ -21,7 +28,7 @@ func _process(delta):
 	elif multiplayer.is_server() and Input.is_action_pressed("test_f2"):
 		lose_game.rpc(Time.get_unix_time_from_system())
 		
-	if $WinUi.is_visible() or $LoseUi.is_visible():
+	if end_time > start_time:
 		$Hud/TimeText.text = format_time(end_time - start_time)
 	else:
 		$Hud/TimeText.text = format_time(Time.get_unix_time_from_system() - start_time)
@@ -46,13 +53,13 @@ func _on_end_area_body_entered(body):
 
 @rpc("call_local")
 func win_game(time):
+	$FinishTimer.start(3.999)
+	$Hud/FinishLabel.show()
 	end_time = time
-	$WinUi.show()
 	if multiplayer.is_server():
 		$EndArea/EndCollision.set_deferred("disabled", true)
 		$WinUi/PlayAgainButton.show()
 		
-
 @rpc("call_local")
 func lose_game(time):
 	end_time = time
@@ -63,6 +70,8 @@ func lose_game(time):
 
 @rpc("call_local")
 func restart_game(time):
+	$StartTimer.start(3.999)
+	$Hud/StartLabel.show()
 	start_time = time
 	$WinUi.hide()
 	$LoseUi.hide()
@@ -80,3 +89,10 @@ func _on_try_again_button_pressed():
 func _on_leave_button_pressed():
 	multiplayer.multiplayer_peer = null
 	get_tree().change_scene_to_file("start.tscn")
+
+func _on_start_timer_timeout():
+	$Hud/StartLabel.hide()
+
+func _on_finish_timer_timeout():
+	$Hud/FinishLabel.hide()
+	$WinUi.show()
