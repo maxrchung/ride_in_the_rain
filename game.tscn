@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://cehw4q1301e37"]
 
-[ext_resource type="Script" path="res://empty.gd" id="1_6nlgn"]
+[ext_resource type="Script" path="res://game.gd" id="1_35o53"]
 
 [node name="Empty" type="Node"]
-script = ExtResource("1_6nlgn")
+script = ExtResource("1_35o53")
 
 [node name="EmptyText" type="Label" parent="."]
 offset_left = 247.0

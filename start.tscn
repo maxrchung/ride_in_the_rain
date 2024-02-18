@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://0mueab7w8f21"]
 
-[ext_resource type="Script" path="res://networking.gd" id="1_47v0c"]
+[ext_resource type="Script" path="res://start.gd" id="1_u02kx"]
 
 [node name="Start" type="CanvasLayer"]
-script = ExtResource("1_47v0c")
+script = ExtResource("1_u02kx")
 
 [node name="CreateButton" type="Button" parent="."]
 offset_left = 410.0

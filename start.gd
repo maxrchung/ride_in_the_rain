@@ -97,7 +97,7 @@ func _on_join_button_pressed():
 
 @rpc("call_local", "reliable")
 func load_game():
-	get_tree().change_scene_to_file("empty.tscn")
+	get_tree().change_scene_to_file("game.tscn")
 
 func _on_start_button_pressed():
 	load_game.rpc()
