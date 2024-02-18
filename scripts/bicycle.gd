@@ -15,14 +15,12 @@ var forward_vector = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var playerCount = 3
-	if multiplayer.has_multiplayer_peer():
-		playerCount = GlobalCrap.players.size()
+	var playerCount = GlobalCrap.players.size()
 	add_bikers(playerCount)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if multiplayer.has_multiplayer_peer() and !multiplayer.is_server():
+	if !multiplayer.is_server():
 		return
 	
 	forward_vector = get_global_transform().basis.z
@@ -42,8 +40,7 @@ func _process(delta):
 	if(current_velocity < 0):
 		current_velocity = 0
 		
-	if multiplayer.has_multiplayer_peer():
-		update_bicycle.rpc(position, rotation)
+	update_bicycle.rpc(position, rotation)
 
 @rpc
 func update_bicycle(new_position, new_rotation):
@@ -53,9 +50,7 @@ func update_bicycle(new_position, new_rotation):
 func add_bikers(amt):
 	for i in amt:
 		var biker_instance = biker_res.instantiate()
-		
-		if multiplayer.has_multiplayer_peer():
-			biker_instance.peer_id = GlobalCrap.players[i]
+		biker_instance.peer_id = GlobalCrap.players[i]
 		
 		add_child(biker_instance)
 		biker_instance.freeze = true

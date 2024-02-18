@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="I-am-the-president"
-run/main_scene="res://maps/test_map.tscn"
+run/main_scene="res://start.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 <<<<<<<Updatedupstreamrun/main_scene="res://start.tscn"

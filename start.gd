@@ -20,7 +20,7 @@ func join_game(address = ""):
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
-	GlobalCrap.players = []
+	GlobalCrap.players = [1]
 	
 func create_game():
 	print("Create game")
@@ -79,7 +79,7 @@ func _on_connected_fail():
 func _on_server_disconnected():
 	print("Server disconnected")
 	multiplayer.multiplayer_peer = null
-	GlobalCrap.players = []
+	GlobalCrap.players = [1]
 	$IpInput.show()
 	$JoinButton.show()
 	$CreateButton.show()
@@ -103,7 +103,7 @@ func _on_start_button_pressed():
 
 func _on_leave_button_pressed():
 	multiplayer.multiplayer_peer = null
-	GlobalCrap.players = []
+	GlobalCrap.players = [1]
 	$IpInput.show()
 	$JoinButton.show()
 	$CreateButton.show()

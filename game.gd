@@ -40,7 +40,7 @@ func _on_connected_fail():
 func _on_server_disconnected():
 	print("Server disconnected")
 	multiplayer.multiplayer_peer = null
-	GlobalCrap.players = []
+	GlobalCrap.players = [1]
 	get_tree().change_scene_to_file("start.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

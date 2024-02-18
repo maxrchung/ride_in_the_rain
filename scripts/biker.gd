@@ -15,7 +15,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if multiplayer.has_multiplayer_peer() and multiplayer.get_unique_id() != peer_id:
+	if multiplayer.get_unique_id() != peer_id:
 		return
 	
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -38,8 +38,8 @@ func _process(_delta):
 		if(current_force < 0):
 			current_force = 0
 			
-	if multiplayer.has_multiplayer_peer():
-		update_biker.rpc_id(1, current_lean, current_force)
+
+	update_biker.rpc_id(1, current_lean, current_force)
 		
 @rpc("any_peer", "call_local")
 func update_biker(lean, force):

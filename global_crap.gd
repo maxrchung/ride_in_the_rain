@@ -4,4 +4,4 @@ extends Node
 # I am using a singleton because it is shared across Start asnd Game
 # scenes. Order is determined by when the peer joined, last means
 # later. You can check your own ID by using multiplayer.get_unique_id()
-var players = []
+var players = [1]
