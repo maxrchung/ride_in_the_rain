@@ -1,10 +1,42 @@
-[gd_scene load_steps=8 format=3 uid="uid://bboibipxo6flu"]
+[gd_scene load_steps=14 format=3 uid="uid://bboibipxo6flu"]
 
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
-[ext_resource type="PackedScene" uid="uid://dfnggqdwkl07a" path="res://assets/models/track_01.glb" id="2_6jibo"]
+[ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="3_a57eh"]
 [ext_resource type="Texture2D" uid="uid://djytkt442qiqt" path="res://icon.svg" id="4_8if12"]
 [ext_resource type="Script" path="res://maps/minimap.gd" id="5_ey4rv"]
+[ext_resource type="PackedScene" uid="uid://cy54or8degxgl" path="res://assets/models/track_dev.glb" id="6_pcrmm"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sw86o"]
+emission_shape_offset = Vector3(0, 16, 0)
+emission_shape = 3
+emission_box_extents = Vector3(16, 0, 16)
+direction = Vector3(0, -1, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2c04q"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.619608, 0.254902, 0.552941, 0.603922)
+
+[sub_resource type="SphereMesh" id="SphereMesh_qccq2"]
+material = SubResource("StandardMaterial3D_2c04q")
+radius = 0.04
+height = 0.04
+radial_segments = 8
+rings = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_rxd2c"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1vtw1"]
+render_priority = 0
+shader = ExtResource("3_a57eh")
+shader_parameter/edge_only = true
+shader_parameter/edge_threshold = 1.0
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/background_color = Color(1, 1, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eigu5"]
 size = Vector3(33.6801, 41.8364, 1)
@@ -20,7 +52,22 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 46.684
 [node name="Camera3D" type="Camera3D" parent="Bicycle"]
 transform = Transform3D(-1, 8.6572e-08, -1.21669e-08, 0, 0.139173, 0.990268, 8.74228e-08, 0.990268, -0.139173, 0, 12.45, -1)
 
-[node name="track_01" parent="." instance=ExtResource("2_6jibo")]
+[node name="Rain" type="GPUParticles3D" parent="Bicycle/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
+amount = 5000
+lifetime = 5.0
+preprocess = 1.0
+process_material = SubResource("ParticleProcessMaterial_sw86o")
+draw_pass_1 = SubResource("SphereMesh_qccq2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Bicycle/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+cast_shadow = 0
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_rxd2c")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_1vtw1")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.92325, 0.384199, 0, -0.384199, 0.92325, 0, 33.8125, 0)
@@ -79,7 +126,7 @@ text = "Leave"
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 46.684, 1.265, 42.851)
 
 [node name="EndArea" type="Area3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 46.684, 1.265, 42.851)
+transform = Transform3D(-0.175298, 0, -0.984515, 0, 1, 0, 0.984515, 0, -0.175298, 78.2538, 1.265, -51.6823)
 
 [node name="EndIndicator" type="Sprite3D" parent="EndArea"]
 transform = Transform3D(25.08, 0, 0, 0, 25.08, 0, 0, 0, 25.08, 0.803822, 0, 38.6651)
@@ -168,6 +215,9 @@ projection = 1
 script = ExtResource("5_ey4rv")
 follow_scan_radius = 100.0
 player_target = NodePath("../../../../Bicycle")
+
+[node name="track_dev" parent="." instance=ExtResource("6_pcrmm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.0864)
 
 [connection signal="pressed" from="WinUi/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
 [connection signal="pressed" from="WinUi/LeaveButton" to="." method="_on_leave_button_pressed"]

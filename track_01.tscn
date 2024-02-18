@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="2_m07rh"]
 [ext_resource type="PackedScene" uid="uid://cg2kldu7u4oic" path="res://assets/models/player_model.glb" id="3_j14ah"]
-[ext_resource type="PackedScene" path="res://assets/models/track_dev.glb" id="3_l0qn3"]
+[ext_resource type="PackedScene" uid="uid://cy54or8degxgl" path="res://assets/models/track_dev.glb" id="3_l0qn3"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0juq7"]
 emission_shape_offset = Vector3(0, 16, 0)
@@ -10,14 +10,14 @@ emission_shape = 3
 emission_box_extents = Vector3(16, 0, 16)
 direction = Vector3(0, -1, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2c04q"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n2658"]
 transparency = 3
 alpha_hash_scale = 1.0
 alpha_antialiasing_mode = 0
 albedo_color = Color(0.619608, 0.254902, 0.552941, 0.603922)
 
 [sub_resource type="SphereMesh" id="SphereMesh_rof5k"]
-material = SubResource("StandardMaterial3D_2c04q")
+material = SubResource("StandardMaterial3D_n2658")
 radius = 0.04
 height = 0.04
 radial_segments = 8
