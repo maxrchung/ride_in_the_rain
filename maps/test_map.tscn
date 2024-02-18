@@ -168,6 +168,7 @@ projection = 1
 script = ExtResource("5_ey4rv")
 follow_scan_radius = 100.0
 player_target = NodePath("../../../../Bicycle")
+player_rotation_target = NodePath("../../../../Bicycle")
 
 [connection signal="pressed" from="WinUi/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
 [connection signal="pressed" from="WinUi/LeaveButton" to="." method="_on_leave_button_pressed"]
