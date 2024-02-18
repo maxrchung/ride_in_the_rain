@@ -9,6 +9,7 @@ extends Camera3D
 
 func _ready():
 	size = follow_scan_radius
+	rotation_degrees.z = 180
 	
 func _process(delta):
 	position = Vector3(target.position.x, 30, target.position.z)
