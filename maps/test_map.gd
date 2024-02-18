@@ -26,13 +26,13 @@ func _process(delta):
 	else:
 		$Hud/TimeText.text = format_time(Time.get_unix_time_from_system() - start_time)
 
-	$Hud/SpeedText.text = str(int($Bicycle.current_velocity))
+	$Hud/SpeedText.text = str(int($Bicycle.current_velocity)) + " km/h"
 
 func format_time(time):
 	var minutes = int(time / 60)
 	var seconds = int(time - (minutes * 60))
 	var milliseconds = int( (time - (minutes * 60) - seconds) * 1000)
-	var display = "%02d" % minutes + ":" + "%02d" % seconds + ":" + "%03d" % milliseconds
+	var display = "%02d" % minutes + "'" + "%02d" % seconds + "\"" + "%03d" % milliseconds
 	return display
 
 @rpc
