@@ -22,13 +22,18 @@ func _process(delta):
 		lose_game.rpc(Time.get_unix_time_from_system())
 		
 	if $WinUi.is_visible() or $LoseUi.is_visible():
-		$Hud/TimeText.text = Time.get_time_string_from_unix_time(end_time - start_time)
+		$Hud/TimeText.text = format_time(end_time - start_time)
 	else:
-		$Hud/TimeText.text = Time.get_time_string_from_unix_time(
-			Time.get_unix_time_from_system() - start_time
-		)
+		$Hud/TimeText.text = format_time(Time.get_unix_time_from_system() - start_time)
 
 	$Hud/SpeedText.text = str(int($Bicycle.current_velocity))
+
+func format_time(time):
+	var minutes = int(time / 60)
+	var seconds = int(time - (minutes * 60))
+	var milliseconds = int( (time - (minutes * 60) - seconds) * 1000)
+	var display = "%02d" % minutes + ":" + "%02d" % seconds + ":" + "%03d" % milliseconds
+	return display
 
 @rpc
 func sync_start_time(time):
