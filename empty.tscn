@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cehw4q1301e37"]
+
+[ext_resource type="Script" path="res://empty.gd" id="1_6nlgn"]
+
+[node name="Empty" type="Node"]
+script = ExtResource("1_6nlgn")
+
+[node name="EmptyText" type="Label" parent="."]
+offset_left = 247.0
+offset_top = 80.0
+offset_right = 297.0
+offset_bottom = 103.0
+text = "Empty"

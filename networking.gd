@@ -1,15 +1,10 @@
 extends Node
 
-signal player_connected(peer_id)
-signal player_disconnected(peer_id)
-signal server_disconnected
-
-const PORT = 7000
+const PORT = 7069
 const DEFAULT_SERVER_IP = "127.0.0.1"
 const MAX_CONNECTIONS = 64
 
-var players = {}
-var players_loaded = 0
+var players = []
 
 func _ready():
 	multiplayer.peer_connected.connect(_on_player_connected)
@@ -19,6 +14,7 @@ func _ready():
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 func join_game(address = ""):
+	print("Join game")
 	if address.is_empty():
 		address = DEFAULT_SERVER_IP
 	var peer = ENetMultiplayerPeer.new()
@@ -26,67 +22,93 @@ func join_game(address = ""):
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
+	players = []
 	
 func create_game():
-	print("Game created")
-	
+	print("Create game")
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(PORT, MAX_CONNECTIONS)
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
-	
-	players[1] = null
-	player_connected.emit(1)
-	
-func remove_multiplayer_peer():
-	multiplayer.multiplayer_peer = null
-	
-	
-@rpc("call_local", "reliable")
-func load_game(game_scene_path):
-	get_tree().change_scene_to_file(game_scene_path)
-	
-@rpc("any_peer", "call_local", "reliable")
-func player_loaded():
-	if multiplayer.is_server():
-		players_loaded += 1
-		if players_loaded == players.size():
-			$/root/Game.start_game()
-			players_loaded = 0
-			
+	update_players([1])
+	$CreateButton.hide()
+	$IpInput.hide()
+	$JoinButton.hide()
+	$WaitingText.show()
+	$StartButton.show()
+	$LeaveButton.show()
+	$PlayersCount.show()
+
+# Server manages and tells everyone about player updates
+@rpc("authority", "call_local")
+func update_players(new_players):
+	players = new_players
+	var list = players.map(map_player_you)
+	$PlayersCount.text = "Players:\n" + "\n".join(list)
+
+func map_player_you(player):
+	if multiplayer.get_unique_id() == player:
+		return str(player) + " (You)"
+	return str(player)
+
 func _on_player_connected(id):
-	print("Player ", id, " connected")
-	_register_player.rpc_id(id)
-	
-@rpc("any_peer")
-func _register_player():
-	var new_player_id = multiplayer.get_remote_sender_id()
-	players[new_player_id] = null
-	player_connected.emit(new_player_id)
-	
+	if multiplayer.is_server():
+		print("Player ", id, " connected")
+		players.push_back(id)
+		update_players.rpc(players)
+
 func _on_player_disconnected(id):
-	players.erase(id)
-	player_disconnected.emit(id)
+	if multiplayer.is_server():
+		print("Player ", id, " disconnected")
+		players = players.filter(func(player): return player != id)
+		update_players.rpc(players)
 	
 func _on_connected_ok():
-	var peer_id = multiplayer.get_unique_id()
-	players[peer_id] = null
-	player_connected.emit(peer_id)
+	print("Connected ok")
+	$IpInput.hide()
+	$JoinButton.hide()
+	$CreateButton.hide()
+	$WaitingText.show()
+	$LeaveButton.show()
+	$PlayersCount.show()
 	
 func _on_connected_fail():
+	print("Connected fail")
 	multiplayer.multiplayer_peer = null
 	
 func _on_server_disconnected():
+	print("Server disconnected")
 	multiplayer.multiplayer_peer = null
-	players.clear()
-	server_disconnected.emit()
-
+	players = []
+	$IpInput.show()
+	$JoinButton.show()
+	$CreateButton.show()
+	$WaitingText.hide()
+	$LeaveButton.hide()
+	$StartButton.hide()
+	$PlayersCount.hide()
 
 func _on_create_button_pressed():
 	create_game()
 
-
 func _on_join_button_pressed():
-	print("Join text", $IpInput.text)
 	join_game()
+
+@rpc("call_local", "reliable")
+func load_game():
+	get_tree().change_scene_to_file("empty.tscn")
+
+func _on_start_button_pressed():
+	load_game.rpc()
+
+func _on_leave_button_pressed():
+	multiplayer.multiplayer_peer = null
+	players = []
+	$IpInput.show()
+	$JoinButton.show()
+	$CreateButton.show()
+	$WaitingText.hide()
+	$LeaveButton.hide()
+	$StartButton.hide()
+	$PlayersCount.hide()
