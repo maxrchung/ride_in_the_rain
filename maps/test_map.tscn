@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
-[ext_resource type="PackedScene" uid="uid://dfnggqdwkl07a" path="res://assets/models/track_01.glb" id="2_6jibo"]
+[ext_resource type="PackedScene" uid="uid://bdhv2ekb58y2y" path="res://assets/models/track_01.glb" id="2_6jibo"]
 [ext_resource type="Texture2D" uid="uid://djytkt442qiqt" path="res://icon.svg" id="4_8if12"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eigu5"]
