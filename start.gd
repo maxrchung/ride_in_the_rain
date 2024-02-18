@@ -4,8 +4,6 @@ const PORT = 7069
 const DEFAULT_SERVER_IP = "127.0.0.1"
 const MAX_CONNECTIONS = 64
 
-var players = []
-
 func _ready():
 	multiplayer.peer_connected.connect(_on_player_connected)
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
@@ -22,7 +20,7 @@ func join_game(address = ""):
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
-	players = []
+	GlobalCrap.players = []
 	
 func create_game():
 	print("Create game")
@@ -43,8 +41,8 @@ func create_game():
 # Server manages and tells everyone about player updates
 @rpc("authority", "call_local")
 func update_players(new_players):
-	players = new_players
-	var list = players.map(map_player_you)
+	GlobalCrap.players = new_players
+	var list = GlobalCrap.players.map(map_player_you)
 	$PlayersCount.text = "Players:\n" + "\n".join(list)
 
 func map_player_you(player):
@@ -55,14 +53,14 @@ func map_player_you(player):
 func _on_player_connected(id):
 	if multiplayer.is_server():
 		print("Player ", id, " connected")
-		players.push_back(id)
-		update_players.rpc(players)
+		GlobalCrap.players.push_back(id)
+		update_players.rpc(GlobalCrap.players)
 
 func _on_player_disconnected(id):
 	if multiplayer.is_server():
 		print("Player ", id, " disconnected")
-		players = players.filter(func(player): return player != id)
-		update_players.rpc(players)
+		GlobalCrap.players = GlobalCrap.players.filter(func(player): return player != id)
+		update_players.rpc(GlobalCrap.players)
 	
 func _on_connected_ok():
 	print("Connected ok")
@@ -80,7 +78,7 @@ func _on_connected_fail():
 func _on_server_disconnected():
 	print("Server disconnected")
 	multiplayer.multiplayer_peer = null
-	players = []
+	GlobalCrap.players = []
 	$IpInput.show()
 	$JoinButton.show()
 	$CreateButton.show()
@@ -104,7 +102,7 @@ func _on_start_button_pressed():
 
 func _on_leave_button_pressed():
 	multiplayer.multiplayer_peer = null
-	players = []
+	GlobalCrap.players = []
 	$IpInput.show()
 	$JoinButton.show()
 	$CreateButton.show()
