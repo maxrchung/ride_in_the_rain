@@ -113,6 +113,11 @@ func crash():
 		biker.top_level = true
 		biker.freeze = false
 		var randvect = Vector3.ZERO
-		#randvect.x = randf()
-		#randvect.z = randf()
-		biker.apply_impulse((current_velocity * forward_vector)*0.1)
+		randvect.x = randf_range(0.7,1.3)
+		randvect.z = randf_range(0.7,1.3)
+		randvect = randvect * linear_velocity
+		randvect.y = randf_range(0.1,2)
+		biker.apply_impulse(randvect)
+		biker.set_inertia(randvect)
+		biker.apply_torque_impulse(randvect)
+		

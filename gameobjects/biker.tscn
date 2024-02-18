@@ -8,7 +8,6 @@ radius = 1.22105
 height = 4.30186
 
 [node name="Biker" type="RigidBody3D"]
-axis_lock_linear_y = true
 gravity_scale = 0.0
 script = ExtResource("1_ss0e7")
 
