@@ -215,6 +215,7 @@ projection = 1
 script = ExtResource("5_ey4rv")
 follow_scan_radius = 100.0
 player_target = NodePath("../../../../Bicycle")
+player_rotation_target = NodePath("../../../../Bicycle")
 
 [node name="track_dev" parent="." instance=ExtResource("6_pcrmm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.0864)

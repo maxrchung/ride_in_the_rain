@@ -12,4 +12,4 @@ func _ready():
 	
 func _process(delta):
 	position = Vector3(target.position.x, 30, target.position.z)
-	#rotation_degrees.y = target_rotation.rotation_degrees.y
+	rotation_degrees.y = target_rotation.rotation_degrees.y
