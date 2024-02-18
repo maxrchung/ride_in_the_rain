@@ -4,10 +4,3 @@
 
 [node name="Game" type="Node"]
 script = ExtResource("1_35o53")
-
-[node name="TestText" type="Label" parent="."]
-offset_left = 247.0
-offset_top = 80.0
-offset_right = 297.0
-offset_bottom = 103.0
-text = "Test"

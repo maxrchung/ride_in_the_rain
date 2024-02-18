@@ -22,7 +22,7 @@ func _ready():
 func _process(delta):
 	if !multiplayer.is_server():
 		return
-		
+	
 	if GlobalCrap.players.size() != bikers.size():
 		resync_bikers.rpc()
 		
@@ -43,7 +43,7 @@ func _process(delta):
 	if(current_velocity < 0):
 		current_velocity = 0
 		
-	update_bicycle.rpc(position, rotation)
+	update_bicycle.rpc(position, rotation, current_velocity)
 	
 @rpc("call_local")
 func resync_bikers():
@@ -56,9 +56,10 @@ func resync_bikers():
 	add_bikers(playerCount)
 
 @rpc
-func update_bicycle(new_position, new_rotation):
+func update_bicycle(new_position, new_rotation, new_velocity):
 	position = new_position
 	rotation = new_rotation
+	current_velocity = new_velocity
 
 func reset():
 	position = get_node("../StartPosition").position
