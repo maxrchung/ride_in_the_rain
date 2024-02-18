@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7k5ww22arkk2"]
+
+[ext_resource type="Script" path="res://scripts/bicycle.gd" id="1_8fjvj"]
+[ext_resource type="PackedScene" uid="uid://bdt4rqfmaofl6" path="res://gameobjects/biker.tscn" id="1_i4moq"]
+[ext_resource type="Texture2D" uid="uid://dacxomv8j80nl" path="res://tutorial_assets/art/enemyWalking_1.png" id="2_3c11i"]
+
+[node name="Bicycle" type="Area2D"]
+script = ExtResource("1_8fjvj")
+
+[node name="Biker" parent="." instance=ExtResource("1_i4moq")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(3, 0.33)
+texture = ExtResource("2_3c11i")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bboibipxo6flu"]
+
+[ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
+[ext_resource type="PackedScene" uid="uid://bdhv2ekb58y2y" path="res://assets/models/track_01.glb" id="2_6jibo"]
+
+[node name="TestMap" type="Node3D"]
+
+[node name="Bicycle" parent="." instance=ExtResource("1_edykj")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 46.6844, 1.26458, 42.8507)
+
+[node name="Camera3D" type="Camera3D" parent="Bicycle"]
+transform = Transform3D(-1, 8.6572e-08, -1.21669e-08, 0, 0.139173, 0.990268, 8.74228e-08, 0.990268, -0.139173, 0, 12.45, -1)
+
+[node name="track_01" parent="." instance=ExtResource("2_6jibo")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.92325, 0.384199, 0, -0.384199, 0.92325, 0, 33.8125, 0)
