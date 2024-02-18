@@ -1,13 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7k5ww22arkk2"]
+[gd_scene load_steps=2 format=3 uid="uid://c7k5ww22arkk2"]
 
 [ext_resource type="Script" path="res://scripts/bicycle.gd" id="1_8fjvj"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cs144"]
-
 [node name="Bicycle" type="RigidBody3D"]
-physics_material_override = SubResource("PhysicsMaterial_cs144")
 gravity_scale = 0.0
 linear_damp_mode = 1
-linear_damp = 1.0
+linear_damp = 10.0
 angular_damp = 100.0
 script = ExtResource("1_8fjvj")

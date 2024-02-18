@@ -1,14 +1,15 @@
 extends RigidBody3D
 
 @export var max_lean = 65
-@export var max_force = 10
+@export var max_force = 300
 var mouse_velocity = Vector2.ZERO
 var current_lean = 0
 var current_force = 0
 var rider
 @export var lean_factor = 0.4
-@export var kb_lean_factor = 500
-@export var kb_speed = 500
+@export var kb_lean_factor = 300
+@export var kb_speed = 20
+var input_vel = Vector2.ZERO
 
 # This is assigned a unique peer ID on multiplayer connection
 var peer_id = 0
@@ -24,7 +25,7 @@ func _process(delta):
 		return
 	
 	
-	var input_vel = Vector2.ZERO
+	input_vel.x = 0
 	#var mouse_pos = get_viewport().get_mouse_position()
 	#var mouse_vel = get_viewport().get_visible_rect().size/2 - mouse_pos
 	#Input.warp_mouse(get_viewport().get_visible_rect().size/2)
@@ -35,7 +36,15 @@ func _process(delta):
 	if Input.is_action_pressed("kb_left"):
 		input_vel.x += kb_lean_factor
 	if Input.is_action_pressed("kb_up"):
-		input_vel.y = max_force
+		if(input_vel.y < max_force):
+			input_vel.y += kb_speed * delta
+		else:
+			input_vel.y = max_force
+	else:
+		if(input_vel.y > 0):
+			input_vel.y -= kb_speed * delta * 0.8
+		else:
+			input_vel.y = 0
 	
 	current_lean += input_vel.x * delta * lean_factor
 	if(current_lean >= 0):
