@@ -13,6 +13,7 @@ emission_shape_offset = Vector3(0, 8, 0)
 emission_shape = 3
 emission_box_extents = Vector3(32, 0, 64)
 direction = Vector3(0, -1, 0)
+spread = 0.0
 initial_velocity_min = 32.0
 initial_velocity_max = 32.0
 
