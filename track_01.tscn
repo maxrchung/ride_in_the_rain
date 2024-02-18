@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://btfvx017xgwr7"]
+
+[ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="2_m07rh"]
+[ext_resource type="PackedScene" uid="uid://cg2kldu7u4oic" path="res://assets/models/player_model.glb" id="3_j14ah"]
+[ext_resource type="PackedScene" path="res://assets/models/track_dev.glb" id="3_l0qn3"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0juq7"]
+emission_shape_offset = Vector3(0, 16, 0)
+emission_shape = 3
+emission_box_extents = Vector3(16, 0, 16)
+direction = Vector3(0, -1, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2c04q"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.619608, 0.254902, 0.552941, 0.603922)
+
+[sub_resource type="SphereMesh" id="SphereMesh_rof5k"]
+material = SubResource("StandardMaterial3D_2c04q")
+radius = 0.04
+height = 0.04
+radial_segments = 8
+rings = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_e6xdm"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lu124"]
+render_priority = 0
+shader = ExtResource("2_m07rh")
+shader_parameter/edge_only = true
+shader_parameter/edge_threshold = 1.0
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/background_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7ny2a"]
+ground_bottom_color = Color(0.121569, 0.0980392, 0.0745098, 1)
+
+[sub_resource type="Sky" id="Sky_woptt"]
+sky_material = SubResource("ProceduralSkyMaterial_7ny2a")
+
+[sub_resource type="Environment" id="Environment_yjfkp"]
+background_mode = 2
+sky = SubResource("Sky_woptt")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 3
+tonemap_exposure = 0.67
+ssr_enabled = true
+ssao_enabled = true
+sdfgi_cascades = 2
+sdfgi_max_distance = 51.2
+fog_density = 0.003
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0142
+volumetric_fog_albedo = Color(0.211765, 0.254902, 0.329412, 1)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.439939, 0.635001, -0.635001, 0, 0.707107, 0.707107, 0.898028, -0.311084, 0.311084, 40, 30, 60)
+fov = 90.0
+size = 87.03
+
+[node name="Rain" type="GPUParticles3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0)
+amount = 5000
+lifetime = 5.0
+preprocess = 1.0
+process_material = SubResource("ParticleProcessMaterial_0juq7")
+draw_pass_1 = SubResource("SphereMesh_rof5k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+cast_shadow = 0
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_e6xdm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_lu124")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yjfkp")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.888921, 0.45806, 0, -0.45806, 0.888921, 0, 17.9737, 0)
+
+[node name="player_model" parent="." instance=ExtResource("3_j14ah")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.7295, 1.37583, 49.4064)
+
+[node name="track_dev" parent="." instance=ExtResource("3_l0qn3")]
