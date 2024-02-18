@@ -66,6 +66,7 @@ func add_bikers(amt):
 		
 func crash():
 	for biker in bikers:
+		biker.top_level = true
 		biker.freeze = false
 		var randvect = Vector3.ZERO
 		randvect.x = randf()
