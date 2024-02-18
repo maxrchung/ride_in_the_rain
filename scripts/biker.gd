@@ -1,7 +1,7 @@
 extends RigidBody3D
 
 @export var max_lean = 65
-@export var max_force = 15
+@export var max_force = 10
 var mouse_velocity = Vector2.ZERO
 var current_lean = 0
 var current_force = 0
@@ -35,7 +35,7 @@ func _process(delta):
 	if Input.is_action_pressed("kb_left"):
 		input_vel.x += kb_lean_factor
 	if Input.is_action_pressed("kb_up"):
-		input_vel.y += kb_speed
+		input_vel.y = max_force
 	
 	current_lean += input_vel.x * delta * lean_factor
 	if(current_lean >= 0):

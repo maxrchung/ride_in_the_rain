@@ -1,12 +1,14 @@
-extends Area3D
+extends RigidBody3D
 
 @export var bikers = []
-@export var max_velocity = 100
-@export var friction = 0.5
+@export var max_velocity = 1500
+@export var friction = 0.8
 @export var handling = 1000
 @export var biker_offset = 2.5
 @export var speedFactor = 0.025
 var current_velocity = 0.0
+var current_force = 0
+var current_acc = 0
 var current_lean = 0
 var current_dir = 0
 var biker_res = preload("res://gameobjects/biker.tscn")
@@ -17,7 +19,15 @@ var forward_vector = Vector3.ZERO
 func _ready():
 	reset()
 
-	
+func _physics_process(delta):
+	apply_force(current_force * forward_vector)
+	var turn = Vector3.ZERO
+	turn.y = 10/(linear_velocity.length()+0.01)
+	set_inertia(turn)
+	var angular_force = Vector3.ZERO
+	angular_force.y = current_lean
+	apply_torque(angular_force)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if !multiplayer.is_server():
@@ -35,18 +45,26 @@ func _process(delta):
 	if Input.is_action_just_pressed("crash"):
 		crash()
 	current_lean = 0
+	current_force = 0
 	for biker in bikers:
-		current_velocity += biker.current_force/bikers.size()
-		current_lean += biker.current_lean
-	#current_lean = current_lean/bikers.size()
-	#if(current_velocity > max_velocity):
-	#	current_velocity = max_velocity
-	#print(bikers[0].current_velocity)
-	position += current_velocity * forward_vector * delta * speedFactor
-	rotation.y += deg_to_rad(current_lean * delta * (current_velocity/handling))
-	current_velocity -= ((current_velocity * friction) + 250) * delta
-	if(current_velocity < 0):
-		current_velocity = 0
+		current_force += (biker.current_force/bikers.size())
+		current_lean += biker.current_lean/bikers.size()
+	#if(current_force < 0):
+		#current_force = 0
+	#else:
+		#current_force -= (current_force * (current_velocity/max_velocity))
+	#if(current_acc < -100):
+		#current_acc = -100
+	#else:
+		#current_acc -= 10
+	#current_acc += current_force * delta
+	#current_velocity += current_acc * delta
+	#if(current_velocity < 0):
+		#current_velocity = 0
+	#position += current_velocity * forward_vector * delta * speedFactor
+	#rotation.y += deg_to_rad(current_lean * delta * (current_velocity/handling))
+	##current_velocity -= ((current_velocity * friction) + 10 + abs(current_lean)) * delta
+	
 		
 	update_bicycle.rpc(position, rotation, current_velocity)
 	
@@ -83,7 +101,7 @@ func add_bikers(amt):
 		add_child(biker_instance)
 		
 		# Don't set freeze true, it makes collisions (e.g. with end area) not work
-		# biker_instance.freeze = true
+		biker_instance.freeze = true
 		
 		var biker_pos = Vector3.ZERO
 		biker_pos.z = -biker_offset * i
