@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://scripts/biker.gd" id="1_ss0e7"]
 [ext_resource type="PackedScene" uid="uid://cj6p3lq2laa0t" path="res://assets/models/player_model.glb" id="2_0hrfo"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2n834"]
-radius = 1.22485
-height = 4.10494
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iflgf"]
+radius = 1.22105
+height = 4.30186
 
 [node name="Biker" type="RigidBody3D"]
 axis_lock_linear_y = true
@@ -15,5 +15,5 @@ script = ExtResource("1_ss0e7")
 [node name="player_model" parent="." instance=ExtResource("2_0hrfo")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.905376, 0)
-shape = SubResource("CapsuleShape3D_2n834")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.894028, 0)
+shape = SubResource("CapsuleShape3D_iflgf")

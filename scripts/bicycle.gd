@@ -15,19 +15,17 @@ var forward_vector = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var playerCount = GlobalCrap.players.size()
-	add_bikers(playerCount)
+	reset()
+
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_pressed("ui_cancel"):
-		multiplayer.multiplayer_peer = null
-		get_tree().change_scene_to_file("start.tscn")
-		return
-	
 	if !multiplayer.is_server():
 		return
-	
+		
+	if GlobalCrap.players.size() != bikers.size():
+		resync_bikers.rpc()
+		
 	forward_vector = get_global_transform().basis.z
 	if Input.is_action_just_pressed("crash"):
 		crash()
@@ -46,19 +44,41 @@ func _process(delta):
 		current_velocity = 0
 		
 	update_bicycle.rpc(position, rotation)
+	
+@rpc("call_local")
+func resync_bikers():
+	for biker in bikers:
+		# If you try queue_free instead of free, a newly created biker may have
+		# a conflicting node name which throws a bunch of RPC errors
+		biker.free()
+	bikers = []
+	var playerCount = GlobalCrap.players.size()
+	add_bikers(playerCount)
 
 @rpc
 func update_bicycle(new_position, new_rotation):
 	position = new_position
 	rotation = new_rotation
 
+func reset():
+	position = get_node("../StartPosition").position
+	rotation = get_node("../StartPosition").rotation
+	current_velocity = 0
+	current_lean = 0
+	resync_bikers()
+
 func add_bikers(amt):
 	for i in amt:
 		var biker_instance = biker_res.instantiate()
 		biker_instance.peer_id = GlobalCrap.players[i]
+		var name = "Biker" + str(GlobalCrap.players[i])
+		biker_instance.name = name
 		
 		add_child(biker_instance)
-		biker_instance.freeze = true
+		
+		# Don't set freeze true, it makes collisions (e.g. with end area) not work
+		# biker_instance.freeze = true
+		
 		var biker_pos = Vector3.ZERO
 		biker_pos.z = -biker_offset * i
 		biker_instance.position = biker_pos
