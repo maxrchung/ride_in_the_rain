@@ -92,7 +92,7 @@ func _on_create_button_pressed():
 	create_game()
 
 func _on_join_button_pressed():
-	join_game()
+	join_game($IpInput.text)
 
 @rpc("call_local")
 func load_game():
