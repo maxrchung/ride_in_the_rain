@@ -16,6 +16,7 @@ var mouse_vel = Vector2.ZERO
 @export var pedal_speed = 2
 @export var is_front = false
 @export var is_rear = false
+@export var scroll_speed = 6
 
 # This is assigned a unique peer ID on multiplayer connection
 var peer_id = 0
@@ -77,6 +78,9 @@ func _process(delta):
 		#var mouse_vel = get_viewport().get_visible_rect().size/2 - mouse_pos
 		#Input.warp_mouse(get_viewport().get_visible_rect().size/2)
 		#input_vel = mouse_vel
+		if Input.is_action_just_pressed("mouse_wheel_up") || Input.is_action_just_pressed("mouse_wheel_down"):
+			input_vel.y += kb_speed * delta * scroll_speed
+		
 		input_vel.x = -mouse_vel.x * mouse_lean
 		input_vel.y += abs(mouse_vel.y) * delta * mouse_speed
 		if(input_vel.y > 0):
