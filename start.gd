@@ -123,3 +123,8 @@ func _on_leave_button_pressed():
 func update_game(data):
 	get_tree().change_scene_to_file("game.tscn")
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+func _on_instructions_button_pressed():
+	Sfx.click_button()
+	get_tree().change_scene_to_file("instructions.tscn")
