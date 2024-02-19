@@ -12,6 +12,7 @@ albedo_color = Color(0.992157, 0.443137, 0.792157, 1)
 
 [node name="Biker" type="RigidBody3D"]
 gravity_scale = 0.0
+freeze = true
 script = ExtResource("1_ss0e7")
 
 [node name="player_model" parent="." instance=ExtResource("2_0hrfo")]

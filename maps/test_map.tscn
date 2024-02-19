@@ -4,16 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
 [ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="3_a57eh"]
 [ext_resource type="Texture2D" uid="uid://djytkt442qiqt" path="res://icon.svg" id="4_8if12"]
-[ext_resource type="Theme" uid="uid://ckvowov5bcv6l" path="res://default_ui_theme.tres" id="5_ee383"]
-[ext_resource type="LabelSettings" uid="uid://cuiayxv1yxm7a" path="res://default_font.tres" id="5_evluj"]
+[ext_resource type="Theme" path="res://default_ui_theme.tres" id="5_ee383"]
+[ext_resource type="LabelSettings" path="res://default_font.tres" id="5_evluj"]
 [ext_resource type="Script" path="res://maps/minimap.gd" id="5_ey4rv"]
 [ext_resource type="Texture2D" uid="uid://cb8ixjsjmdt27" path="res://minimap.png" id="5_vosp2"]
 [ext_resource type="Shader" path="res://maps/minimap.gdshader" id="6_2phuh"]
-[ext_resource type="PackedScene" uid="uid://cy54or8degxgl" path="res://assets/models/track_dev.glb" id="6_pcrmm"]
 [ext_resource type="Texture2D" uid="uid://cdqnmaxdommg5" path="res://assets/skybox/whipple_creek_regional_park_04_4k.exr" id="7_4ydi2"]
 [ext_resource type="Texture2D" uid="uid://6yl14rwg2u4j" path="res://indicator.png" id="7_7y5m3"]
 [ext_resource type="Texture2D" uid="uid://c75edv10pbfa6" path="res://assets/ui/speedometer_bg.png" id="9_833qe"]
 [ext_resource type="Texture2D" uid="uid://1gksp40cof8k" path="res://assets/ui/speedometer_arm.png" id="10_54bol"]
+[ext_resource type="PackedScene" uid="uid://xola47y16src" path="res://track_dev.tscn" id="13_qqrku"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sw86o"]
 emission_shape = 3
@@ -113,40 +113,27 @@ transform = Transform3D(1, 0, 0, 0, 0.92325, 0.384199, 0, -0.384199, 0.92325, 0,
 visible = false
 
 [node name="YouWonText" type="Label" parent="WinUi"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -142.0
-offset_top = 104.0
-offset_right = 147.0
-offset_bottom = 169.0
-grow_horizontal = 2
+offset_left = 321.0
+offset_top = 160.0
+offset_right = 492.0
+offset_bottom = 183.0
 text = "Hey you won congrats"
 label_settings = ExtResource("5_evluj")
 
 [node name="PlayAgainButton" type="Button" parent="WinUi"]
 visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -105.0
-offset_top = 186.0
-offset_right = -18.0
-offset_bottom = 227.0
-grow_horizontal = 2
+offset_left = 320.0
+offset_top = 229.0
+offset_right = 407.0
+offset_bottom = 260.0
 theme = ExtResource("5_ee383")
-theme_override_font_sizes/font_size = 0
 text = "Play again"
 
 [node name="LeaveButton" type="Button" parent="WinUi"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 36.0
-offset_top = 192.0
-offset_right = 89.0
-offset_bottom = 225.0
-grow_horizontal = 2
+offset_left = 462.0
+offset_top = 246.0
+offset_right = 515.0
+offset_bottom = 277.0
 theme = ExtResource("5_ee383")
 text = "Leave"
 
@@ -154,35 +141,32 @@ text = "Leave"
 visible = false
 
 [node name="YouWonText" type="Label" parent="LoseUi"]
-offset_left = 495.0
-offset_top = 105.0
-offset_right = 666.0
-offset_bottom = 170.0
+offset_left = 431.0
+offset_top = 309.0
+offset_right = 602.0
+offset_bottom = 332.0
 text = "Lol you lost"
-label_settings = ExtResource("5_evluj")
 
 [node name="TryAgainButton" type="Button" parent="LoseUi"]
 visible = false
-offset_left = 471.0
-offset_top = 186.0
-offset_right = 558.0
-offset_bottom = 227.0
-theme = ExtResource("5_ee383")
+offset_left = 417.0
+offset_top = 376.0
+offset_right = 504.0
+offset_bottom = 407.0
 text = "Try again"
 
 [node name="LeaveButton" type="Button" parent="LoseUi"]
-offset_left = 613.0
-offset_top = 190.0
-offset_right = 666.0
-offset_bottom = 223.0
-theme = ExtResource("5_ee383")
+offset_left = 551.0
+offset_top = 391.0
+offset_right = 604.0
+offset_bottom = 422.0
 text = "Leave"
 
 [node name="StartPosition" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 46.684, 1.265, 42.851)
 
 [node name="EndArea" type="Area3D" parent="."]
-transform = Transform3D(-0.175298, 0, -0.984515, 0, 1, 0, 0.984515, 0, -0.175298, 78.2538, 1.265, -51.6823)
+transform = Transform3D(-0.175298, 0, -0.984515, 0, 1, 0, 0.984515, 0, -0.175298, 78.254, 100, -51.682)
 
 [node name="EndIndicator" type="Sprite3D" parent="EndArea"]
 transform = Transform3D(25.08, 0, 0, 0, 25.08, 0, 0, 0, 25.08, 0.803822, 0, 38.6651)
@@ -214,27 +198,19 @@ label_settings = ExtResource("5_evluj")
 
 [node name="StartLabel" type="Label" parent="Hud"]
 visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -8.0
-offset_top = 129.0
-offset_right = 11.0
-offset_bottom = 178.0
-grow_horizontal = 2
+offset_left = 497.0
+offset_top = 249.0
+offset_right = 537.0
+offset_bottom = 272.0
 text = "3"
 label_settings = ExtResource("5_evluj")
 
 [node name="FinishLabel" type="Label" parent="Hud"]
 visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -75.0
-offset_top = 129.0
-offset_right = 78.0
-offset_bottom = 194.0
-grow_horizontal = 2
+offset_left = 516.0
+offset_top = 280.0
+offset_right = 568.0
+offset_bottom = 303.0
 text = "FINISH!"
 label_settings = ExtResource("5_evluj")
 
@@ -327,8 +303,8 @@ one_shot = true
 wait_time = 3.999
 one_shot = true
 
-[node name="track_dev" parent="." instance=ExtResource("6_pcrmm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.0864)
+[node name="track_dev" parent="." instance=ExtResource("13_qqrku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -19.086)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xjsex")
@@ -340,3 +316,4 @@ environment = SubResource("Environment_xjsex")
 [connection signal="body_entered" from="EndArea" to="." method="_on_end_area_body_entered"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="FinishTimer" to="." method="_on_finish_timer_timeout"]
+[connection signal="area_shape_entered" from="track_dev" to="." method="_on_track_dev_area_shape_entered"]
