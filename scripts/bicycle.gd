@@ -125,15 +125,21 @@ func add_bikers(amt):
 		bikers.append(biker_instance)
 
 func crash():
+	var total_force = 0
+	for biker in bikers:
+		total_force += biker.current_force
+	total_force = total_force/bikers.size()
+	
 	for biker in bikers:
 		biker.top_level = true
 		biker.freeze = false
 		var randvect = Vector3.ZERO
-		randvect.x = randf_range(0.7,1.3)
-		randvect.z = randf_range(0.7,1.3)
-		randvect = randvect * linear_velocity
-		randvect.y = randf_range(0.1,2)
+		randvect.x = randf_range(-0.1,0.1)
+		randvect.z = randf_range(-0.3,-0.6)
+		randvect = randvect * (total_force) * 0.1
+		randvect.y = randf_range(0.1,1)
+		print(randvect)
 		biker.apply_impulse(randvect)
-		biker.set_inertia(randvect)
+		#biker.set_inertia(randvect)
 		biker.apply_torque_impulse(randvect)
 		
