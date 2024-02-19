@@ -115,4 +115,4 @@ func _on_track_dev_area_shape_entered(area_rid, area, area_shape_index, local_sh
 	print("CrashTime")
 	if multiplayer.is_server():
 		$Bicycle.crash()
-		lose_game()
+		lose_game.rpc()
