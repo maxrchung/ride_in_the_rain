@@ -49,14 +49,11 @@ size = Vector3(33.6801, 41.8364, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dxl2j"]
 shader = ExtResource("6_2phuh")
-shader_parameter/radius = null
+shader_parameter/radius = 1.0
 
-[sub_resource type="Environment" id="Environment_uk4f5"]
-reflected_light_source = 1
-tonemap_mode = 3
-adjustment_brightness = 5.2
-adjustment_contrast = 3.9
-adjustment_saturation = 0.01
+[sub_resource type="Environment" id="Environment_njfes"]
+background_mode = 1
+background_color = Color(1, 1, 1, 0)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a0xp4"]
 panorama = ExtResource("7_4ydi2")
@@ -250,9 +247,9 @@ size = Vector2i(200, 200)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="TextureRect/SubViewportContainer/SubViewport"]
-transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 46.684, 12.45, 42.851)
-cull_mask = 512
-environment = SubResource("Environment_uk4f5")
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 46.684, 12.45, 42.851)
+cull_mask = 1048573
+environment = SubResource("Environment_njfes")
 projection = 1
 script = ExtResource("5_ey4rv")
 follow_scan_radius = 100.0
