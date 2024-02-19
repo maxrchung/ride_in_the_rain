@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://btfvx017xgwr7"]
 
 [ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="2_m07rh"]
-[ext_resource type="PackedScene" uid="uid://cg2kldu7u4oic" path="res://assets/models/player_model.glb" id="3_j14ah"]
+[ext_resource type="PackedScene" uid="uid://c77xmq7im7i5" path="res://assets/models/player_model.glb" id="3_j14ah"]
 [ext_resource type="PackedScene" uid="uid://cy54or8degxgl" path="res://assets/models/track_dev.glb" id="3_l0qn3"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0juq7"]

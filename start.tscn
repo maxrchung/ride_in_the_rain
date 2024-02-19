@@ -1,12 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://0mueab7w8f21"]
+[gd_scene load_steps=8 format=3 uid="uid://0mueab7w8f21"]
 
 [ext_resource type="Script" path="res://start.gd" id="1_u02kx"]
 [ext_resource type="Texture2D" uid="uid://cuv4gbgva6c1a" path="res://assets/ui/btn_create_game.png" id="2_x0q0c"]
 [ext_resource type="Texture2D" uid="uid://cip1sn2wflgem" path="res://assets/ui/btn_start_game.png" id="3_38bn3"]
 [ext_resource type="Texture2D" uid="uid://bhn7j2ssbui2d" path="res://assets/ui/btn_join_game.png" id="3_hde24"]
 [ext_resource type="Texture2D" uid="uid://c6kqt565xga07" path="res://assets/ui/btn_leave_game.png" id="4_5v2yp"]
-
-[sub_resource type="Theme" id="Theme_vnyu2"]
+[ext_resource type="Theme" uid="uid://ckvowov5bcv6l" path="res://default_ui_theme.tres" id="6_vq6qa"]
+[ext_resource type="LabelSettings" uid="uid://cuiayxv1yxm7a" path="res://default_font.tres" id="7_l8gfs"]
 
 [node name="Game" type="CanvasLayer"]
 script = ExtResource("1_u02kx")
@@ -46,11 +46,11 @@ scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("3_hde24")
 
 [node name="IpInput" type="LineEdit" parent="."]
-offset_left = 121.0
-offset_top = 395.0
-offset_right = 331.0
-offset_bottom = 432.0
-theme = SubResource("Theme_vnyu2")
+offset_left = 95.0
+offset_top = 406.0
+offset_right = 305.0
+offset_bottom = 443.0
+theme = ExtResource("6_vq6qa")
 placeholder_text = "IP Address"
 
 [node name="WaitingText" type="Label" parent="."]
@@ -60,6 +60,7 @@ offset_top = 47.0
 offset_right = 639.0
 offset_bottom = 70.0
 text = "Waiting..."
+label_settings = ExtResource("7_l8gfs")
 
 [node name="PlayersCount" type="Label" parent="."]
 visible = false
@@ -68,6 +69,7 @@ offset_top = 26.0
 offset_right = 96.0
 offset_bottom = 49.0
 text = "Players: "
+label_settings = ExtResource("7_l8gfs")
 
 [connection signal="pressed" from="CreateButton" to="." method="_on_create_button_pressed"]
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
