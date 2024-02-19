@@ -51,7 +51,7 @@ func update_players(new_players):
 			list.push_back(str(key) + " (You)")
 		else:
 			list.push_back(str(key))
-	$PlayersCount.text = "Players:\n" + "\n".join(list)
+	$PlayersCount.text = "\n".join(list)
 
 func _on_player_connected(id):
 	if multiplayer.is_server():
