@@ -1,12 +1,15 @@
-[gd_scene load_steps=19 format=3 uid="uid://bboibipxo6flu"]
+[gd_scene load_steps=22 format=3 uid="uid://bboibipxo6flu"]
 
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
 [ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="3_a57eh"]
 [ext_resource type="Texture2D" uid="uid://djytkt442qiqt" path="res://icon.svg" id="4_8if12"]
 [ext_resource type="Script" path="res://maps/minimap.gd" id="5_ey4rv"]
+[ext_resource type="Texture2D" uid="uid://cb8ixjsjmdt27" path="res://minimap.png" id="5_vosp2"]
+[ext_resource type="Shader" path="res://maps/minimap.gdshader" id="6_2phuh"]
 [ext_resource type="PackedScene" uid="uid://cy54or8degxgl" path="res://assets/models/track_dev.glb" id="6_pcrmm"]
 [ext_resource type="Texture2D" uid="uid://cdqnmaxdommg5" path="res://assets/skybox/whipple_creek_regional_park_04_4k.exr" id="7_4ydi2"]
+[ext_resource type="Texture2D" uid="uid://6yl14rwg2u4j" path="res://indicator.png" id="7_7y5m3"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sw86o"]
 emission_shape = 3
@@ -44,7 +47,9 @@ shader_parameter/background_color = Color(1, 1, 1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_eigu5"]
 size = Vector3(33.6801, 41.8364, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0pe7u"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dxl2j"]
+shader = ExtResource("6_2phuh")
+shader_parameter/radius = null
 
 [sub_resource type="Environment" id="Environment_uk4f5"]
 reflected_light_source = 1
@@ -230,9 +235,10 @@ offset_left = 23.0
 offset_top = 431.0
 offset_right = 223.0
 offset_bottom = 631.0
-texture = SubResource("ViewportTexture_0pe7u")
+texture = ExtResource("5_vosp2")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="TextureRect"]
+material = SubResource("ShaderMaterial_dxl2j")
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 200.0
@@ -240,13 +246,11 @@ offset_bottom = 200.0
 [node name="SubViewport" type="SubViewport" parent="TextureRect/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-scaling_3d_mode = 1
-scaling_3d_scale = 0.75
 size = Vector2i(200, 200)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="TextureRect/SubViewportContainer/SubViewport"]
-transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, 46.684, 12.45, 42.851)
+transform = Transform3D(-1, 1.50996e-07, 6.60024e-15, 0, -4.37114e-08, 1, 1.50996e-07, 1, 4.37114e-08, 46.684, 12.45, 42.851)
 cull_mask = 512
 environment = SubResource("Environment_uk4f5")
 projection = 1
@@ -254,6 +258,21 @@ script = ExtResource("5_ey4rv")
 follow_scan_radius = 100.0
 player_target = NodePath("../../../../Bicycle")
 player_rotation_target = NodePath("../../../../Bicycle")
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_7y5m3")
 
 [node name="track_dev" parent="." instance=ExtResource("6_pcrmm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.0864)
