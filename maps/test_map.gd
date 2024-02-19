@@ -62,6 +62,7 @@ func _on_end_area_body_entered(body):
 
 @rpc("call_local")
 func win_game(time):
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$FinishTimer.start(3.999)
 	$Hud/FinishLabel.show()
 	end_time = time
@@ -71,6 +72,7 @@ func win_game(time):
 		
 @rpc("call_local")
 func lose_game():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$LoseUi.show()
 	if multiplayer.is_server():
 		$EndArea/EndCollision.set_deferred("disabled", true)
