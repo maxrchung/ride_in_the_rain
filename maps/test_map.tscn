@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bboibipxo6flu"]
+[gd_scene load_steps=26 format=3 uid="uid://bboibipxo6flu"]
 
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://6yl14rwg2u4j" path="res://indicator.png" id="7_7y5m3"]
 [ext_resource type="Texture2D" uid="uid://c75edv10pbfa6" path="res://assets/ui/speedometer_bg.png" id="9_833qe"]
 [ext_resource type="Texture2D" uid="uid://1gksp40cof8k" path="res://assets/ui/speedometer_arm.png" id="10_54bol"]
+[ext_resource type="Texture2D" uid="uid://bjbt6avfuuikd" path="res://assets/text/three.png" id="13_htrb5"]
 [ext_resource type="PackedScene" uid="uid://xola47y16src" path="res://track_dev.tscn" id="13_qqrku"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sw86o"]
@@ -320,6 +321,15 @@ offset_bottom = 631.0
 text = "0"
 label_settings = ExtResource("5_evluj")
 horizontal_alignment = 2
+
+[node name="PopupInfo" type="TextureRect" parent="Hud"]
+visible = false
+offset_left = 504.0
+offset_top = 170.0
+offset_right = 1016.0
+offset_bottom = 682.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("13_htrb5")
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 3.999
