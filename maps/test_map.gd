@@ -128,3 +128,18 @@ func _on_track_dev_area_shape_entered(area_rid, area, area_shape_index, local_sh
 			print("CrashTime")
 			$Bicycle.crash()
 			lose_game.rpc()
+
+
+func _on_track_02_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	if multiplayer.is_server():
+		if !is_in_ending():
+			print("CrashTime")
+			$Bicycle.crash()
+			lose_game.rpc()
+
+
+func _on_end_area_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	print("End area collision")
+	if multiplayer.is_server():
+		if !is_in_ending():
+			win_game.rpc(Time.get_unix_time_from_system())

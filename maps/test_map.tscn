@@ -3,18 +3,18 @@
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
 [ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="3_a57eh"]
-[ext_resource type="Theme" uid="uid://ckvowov5bcv6l" path="res://default_ui_theme.tres" id="5_ee383"]
-[ext_resource type="LabelSettings" uid="uid://cuiayxv1yxm7a" path="res://default_font.tres" id="5_evluj"]
+[ext_resource type="Theme" path="res://default_ui_theme.tres" id="5_ee383"]
+[ext_resource type="LabelSettings" path="res://default_font.tres" id="5_evluj"]
 [ext_resource type="Script" path="res://maps/minimap.gd" id="5_ey4rv"]
 [ext_resource type="Texture2D" uid="uid://cb8ixjsjmdt27" path="res://minimap.png" id="5_vosp2"]
 [ext_resource type="Shader" path="res://maps/minimap.gdshader" id="6_2phuh"]
+[ext_resource type="PackedScene" uid="uid://dltt3micujaoi" path="res://track02_unbaked.tscn" id="6_ht2i6"]
 [ext_resource type="PackedScene" uid="uid://dgqlbnpna5a33" path="res://assets/models/goal.glb" id="6_k6a8r"]
 [ext_resource type="Texture2D" uid="uid://cdqnmaxdommg5" path="res://assets/skybox/whipple_creek_regional_park_04_4k.exr" id="7_4ydi2"]
 [ext_resource type="Texture2D" uid="uid://6yl14rwg2u4j" path="res://indicator.png" id="7_7y5m3"]
 [ext_resource type="Texture2D" uid="uid://c75edv10pbfa6" path="res://assets/ui/speedometer_bg.png" id="9_833qe"]
 [ext_resource type="Texture2D" uid="uid://1gksp40cof8k" path="res://assets/ui/speedometer_arm.png" id="10_54bol"]
 [ext_resource type="Texture2D" uid="uid://bjbt6avfuuikd" path="res://assets/text/three.png" id="13_htrb5"]
-[ext_resource type="PackedScene" uid="uid://xola47y16src" path="res://track_dev.tscn" id="13_qqrku"]
 [ext_resource type="PackedScene" path="res://post_process_vhs.tscn" id="16_0dkb4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a0xp4"]
@@ -70,8 +70,8 @@ shader_parameter/edge_threshold = 1.0
 shader_parameter/line_color = Color(1, 1, 1, 1)
 shader_parameter/background_color = Color(1, 1, 1, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_eigu5"]
-size = Vector3(33.6801, 41.8364, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_hap21"]
+size = Vector3(12.6613, 10.1151, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dxl2j"]
 shader = ExtResource("6_2phuh")
@@ -84,7 +84,7 @@ script = ExtResource("1_0a3d1")
 environment = SubResource("Environment_xjsex")
 
 [node name="Bicycle" parent="." instance=ExtResource("1_edykj")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 46.6844, 1.26458, 42.8507)
+transform = Transform3D(0.414916, 0, 0.90986, 0, 1, 0, -0.90986, 0, 0.414916, 76.4423, 14.3913, -125.888)
 
 [node name="Camera3D" type="Camera3D" parent="Bicycle"]
 transform = Transform3D(-1, 1.04927e-07, 3.03398e-08, 8.9295e-08, 0.625392, 0.78031, 6.29014e-08, 0.78031, -0.625392, 0, 14, -9)
@@ -112,24 +112,24 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_1vtw1")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.92325, 0.384199, 0, -0.384199, 0.92325, 0, 33.8125, 0)
+transform = Transform3D(0.982871, 0.0708058, -0.17015, 0.102648, -0.97711, 0.186333, -0.153062, -0.200607, -0.967641, 0, 33.8125, 0)
+visible = false
 
 [node name="StartPosition" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 46.684, 1.265, 42.851)
+transform = Transform3D(-0.650986, 0, 0.75909, 0, 1, 0, -0.75909, 0, -0.650986, 49.5913, -2.12313, -100.834)
+
+[node name="track_02" parent="." instance=ExtResource("6_ht2i6")]
+transform = Transform3D(-0.175298, 0, -0.984516, 0, 1, 0, 0.984516, 0, -0.175298, 78.254, -2.2226, -51.682)
 
 [node name="EndArea" type="Area3D" parent="."]
-transform = Transform3D(-0.175298, 0, -0.984515, 0, 1, 0, 0.984515, 0, -0.175298, 78.254, 100, -51.682)
-
-[node name="EndCollision" type="CollisionShape3D" parent="EndArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.46827, -2.81274, 38.5781)
-shape = SubResource("BoxShape3D_eigu5")
-disabled = true
+transform = Transform3D(0.734405, 0, 0.678711, 0, 1, 0, -0.678711, 0, 0.734405, 24.9118, -2.11258, 13.0803)
 
 [node name="goal" parent="EndArea" instance=ExtResource("6_k6a8r")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 0.5, 0, 8.74228e-08, 0, -1, -1.227, 0, 41.7151)
+transform = Transform3D(-0.765, 0, -1.15512e-07, 0, 0.383, 0, 1.15512e-07, 0, -0.765, 0, -0.563751, 0)
 
-[node name="track_dev" parent="." instance=ExtResource("13_qqrku")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -19.086)
+[node name="EndCollision" type="CollisionShape3D" parent="EndArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.30051, 3.82758, 0)
+shape = SubResource("BoxShape3D_hap21")
 
 [node name="Hud" type="CanvasLayer" parent="."]
 
@@ -348,8 +348,9 @@ one_shot = true
 
 [node name="PostProcess_VHS" parent="." instance=ExtResource("16_0dkb4")]
 
+[connection signal="area_shape_entered" from="track_02" to="." method="_on_track_02_area_shape_entered"]
+[connection signal="area_shape_entered" from="EndArea" to="." method="_on_end_area_area_shape_entered"]
 [connection signal="body_entered" from="EndArea" to="." method="_on_end_area_body_entered"]
-[connection signal="area_shape_entered" from="track_dev" to="." method="_on_track_dev_area_shape_entered"]
 [connection signal="pressed" from="LoseUi/TryAgainButton" to="." method="_on_try_again_button_pressed"]
 [connection signal="pressed" from="LoseUi/LeaveButton" to="." method="_on_leave_button_pressed"]
 [connection signal="pressed" from="WinUi/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
