@@ -3,12 +3,13 @@
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
 [ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="3_a57eh"]
-[ext_resource type="Texture2D" uid="uid://djytkt442qiqt" path="res://icon.svg" id="4_8if12"]
 [ext_resource type="Theme" uid="uid://ckvowov5bcv6l" path="res://default_ui_theme.tres" id="5_ee383"]
 [ext_resource type="LabelSettings" uid="uid://cuiayxv1yxm7a" path="res://default_font.tres" id="5_evluj"]
 [ext_resource type="Script" path="res://maps/minimap.gd" id="5_ey4rv"]
 [ext_resource type="Texture2D" uid="uid://cb8ixjsjmdt27" path="res://minimap.png" id="5_vosp2"]
 [ext_resource type="Shader" path="res://maps/minimap.gdshader" id="6_2phuh"]
+[ext_resource type="PackedScene" uid="uid://dgqlbnpna5a33" path="res://assets/models/goal.glb" id="6_k6a8r"]
+[ext_resource type="PackedScene" uid="uid://cy54or8degxgl" path="res://assets/models/track_dev.glb" id="6_pcrmm"]
 [ext_resource type="Texture2D" uid="uid://cdqnmaxdommg5" path="res://assets/skybox/whipple_creek_regional_park_04_4k.exr" id="7_4ydi2"]
 [ext_resource type="Texture2D" uid="uid://6yl14rwg2u4j" path="res://indicator.png" id="7_7y5m3"]
 [ext_resource type="Texture2D" uid="uid://c75edv10pbfa6" path="res://assets/ui/speedometer_bg.png" id="9_833qe"]
@@ -187,14 +188,13 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 46.684
 [node name="EndArea" type="Area3D" parent="."]
 transform = Transform3D(-0.175298, 0, -0.984515, 0, 1, 0, 0.984515, 0, -0.175298, 78.254, 100, -51.682)
 
-[node name="EndIndicator" type="Sprite3D" parent="EndArea"]
-transform = Transform3D(25.08, 0, 0, 0, 25.08, 0, 0, 0, 25.08, 0.803822, 0, 38.6651)
-texture = ExtResource("4_8if12")
-
 [node name="EndCollision" type="CollisionShape3D" parent="EndArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.46827, -2.81274, 38.5781)
 shape = SubResource("BoxShape3D_eigu5")
 disabled = true
+
+[node name="goal" parent="EndArea" instance=ExtResource("6_k6a8r")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 0.5, 0, 8.74228e-08, 0, -1, -1.227, 0, 41.7151)
 
 [node name="Hud" type="CanvasLayer" parent="."]
 
@@ -331,7 +331,7 @@ wait_time = 3.999
 one_shot = true
 
 [node name="track_dev" parent="." instance=ExtResource("13_qqrku")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -19.086)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -19.086)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xjsex")
