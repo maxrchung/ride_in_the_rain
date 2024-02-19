@@ -11,5 +11,5 @@ autoplay = true
 
 [node name="Euro" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_l71jt")
-volume_db = -15.0
+volume_db = -5.0
 autoplay = true
