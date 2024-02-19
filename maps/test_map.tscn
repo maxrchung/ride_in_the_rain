@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
 [ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="3_a57eh"]
 [ext_resource type="Texture2D" uid="uid://djytkt442qiqt" path="res://icon.svg" id="4_8if12"]
-[ext_resource type="Theme" path="res://default_ui_theme.tres" id="5_ee383"]
-[ext_resource type="LabelSettings" path="res://default_font.tres" id="5_evluj"]
+[ext_resource type="Theme" uid="uid://ckvowov5bcv6l" path="res://default_ui_theme.tres" id="5_ee383"]
+[ext_resource type="LabelSettings" uid="uid://cuiayxv1yxm7a" path="res://default_font.tres" id="5_evluj"]
 [ext_resource type="Script" path="res://maps/minimap.gd" id="5_ey4rv"]
 [ext_resource type="Texture2D" uid="uid://cb8ixjsjmdt27" path="res://minimap.png" id="5_vosp2"]
 [ext_resource type="Shader" path="res://maps/minimap.gdshader" id="6_2phuh"]
@@ -179,23 +179,8 @@ disabled = true
 
 [node name="Hud" type="CanvasLayer" parent="."]
 
-[node name="SpeedLabel" type="Label" parent="Hud"]
-offset_left = 26.0
-offset_top = 57.0
-offset_right = 111.0
-offset_bottom = 108.0
-text = "Speed:"
-label_settings = ExtResource("5_evluj")
-
-[node name="SpeedText" type="Label" parent="Hud"]
-offset_left = 131.0
-offset_top = 67.0
-offset_right = 171.0
-offset_bottom = 116.0
-text = "0"
-label_settings = ExtResource("5_evluj")
-
 [node name="TimeLabel" type="Label" parent="Hud"]
+visible = false
 offset_left = 31.0
 offset_top = 8.0
 offset_right = 112.0
@@ -204,11 +189,11 @@ text = "Time:"
 label_settings = ExtResource("5_evluj")
 
 [node name="TimeText" type="Label" parent="Hud"]
-offset_left = 139.0
-offset_top = 17.0
-offset_right = 179.0
-offset_bottom = 66.0
-text = "0"
+offset_left = 925.0
+offset_top = 7.0
+offset_right = 1126.0
+offset_bottom = 72.0
+text = "00'00\"000"
 label_settings = ExtResource("5_evluj")
 
 [node name="StartLabel" type="Label" parent="Hud"]
@@ -292,6 +277,23 @@ rotation = -1.51844
 scale = Vector2(0.75, 0.75)
 pivot_offset = Vector2(237.21, 376.585)
 texture = ExtResource("10_54bol")
+
+[node name="SpeedLabel" type="Label" parent="Hud"]
+offset_left = 1008.0
+offset_top = 565.0
+offset_right = 1093.0
+offset_bottom = 630.0
+text = "km/h"
+label_settings = ExtResource("5_evluj")
+
+[node name="SpeedText" type="Label" parent="Hud"]
+offset_left = 855.0
+offset_top = 582.0
+offset_right = 996.0
+offset_bottom = 631.0
+text = "0"
+label_settings = ExtResource("5_evluj")
+horizontal_alignment = 2
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 3.999

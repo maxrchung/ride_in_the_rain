@@ -40,7 +40,7 @@ func _process(delta):
 	else:
 		$Hud/TimeText.text = format_time(Time.get_unix_time_from_system() - start_time)
 
-	$Hud/SpeedText.text = str(int($Bicycle.speed)) + " km/h"
+	$Hud/SpeedText.text = str(int($Bicycle.speed))
 	var speed_abs = $Bicycle.speed / 30
 	$Hud/SpeedometerBg/SpeedometerArm.rotation_degrees = (speed_abs * (162)) - 87 
 
