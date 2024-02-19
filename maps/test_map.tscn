@@ -240,8 +240,6 @@ offset_bottom = 200.0
 [node name="SubViewport" type="SubViewport" parent="TextureRect/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-scaling_3d_mode = 1
-scaling_3d_scale = 0.75
 size = Vector2i(200, 200)
 render_target_update_mode = 4
 
