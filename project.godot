@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 GlobalCrap="*res://global_crap.gd"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [input]
 
 kb_right={
