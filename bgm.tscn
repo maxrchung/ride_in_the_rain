@@ -1,7 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj8gup76i2efn"]
+[gd_scene load_steps=3 format=3 uid="uid://bj8gup76i2efn"]
 
 [ext_resource type="AudioStream" uid="uid://dkqgwp8akyuh5" path="res://assets/sounds/rain_loop.ogg" id="1_18vl7"]
+[ext_resource type="AudioStream" uid="uid://cdftt4628e32v" path="res://assets/sounds/euro.mp3" id="2_l71jt"]
 
-[node name="Bgm" type="AudioStreamPlayer"]
+[node name="Bgm" type="Node"]
+
+[node name="Rain" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_18vl7")
+autoplay = true
+
+[node name="Euro" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_l71jt")
+volume_db = -15.0
 autoplay = true

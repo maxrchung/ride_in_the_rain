@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://sfx.gd" id="1_21ens"]
 [ext_resource type="AudioStream" uid="uid://7n2tku8rnuy1" path="res://assets/sounds/engine.mp3" id="2_t3ut3"]
-[ext_resource type="AudioStream" uid="uid://dbfmgu6prd4uk" path="res://assets/sounds/ui_click.wav" id="2_wrvkc"]
+[ext_resource type="AudioStream" uid="uid://ctot8lhn2fbkc" path="res://assets/sounds/click_button.wav" id="2_tkh18"]
 [ext_resource type="AudioStream" uid="uid://ck5k4l0hbvm3b" path="res://assets/sounds/game_over.mp3" id="3_nv0up"]
 [ext_resource type="AudioStream" uid="uid://kjejsmt227en" path="res://assets/sounds/cheer.mp3" id="4_14x3a"]
 
@@ -10,7 +10,7 @@
 script = ExtResource("1_21ens")
 
 [node name="ClickButton" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_wrvkc")
+stream = ExtResource("2_tkh18")
 
 [node name="GameOver" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_nv0up")

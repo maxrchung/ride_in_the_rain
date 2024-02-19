@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c6kqt565xga07" path="res://assets/ui/btn_leave_game.png" id="4_5v2yp"]
 [ext_resource type="Theme" uid="uid://ckvowov5bcv6l" path="res://default_ui_theme.tres" id="6_vq6qa"]
 [ext_resource type="LabelSettings" uid="uid://cuiayxv1yxm7a" path="res://default_font.tres" id="7_l8gfs"]
-[ext_resource type="PackedScene" uid="uid://strvpwv4qfcc" path="res://post_process_vhs.tscn" id="8_ls4en"]
+[ext_resource type="PackedScene" path="res://post_process_vhs.tscn" id="8_ls4en"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_3f4bj"]
 panorama = ExtResource("2_sdw6w")

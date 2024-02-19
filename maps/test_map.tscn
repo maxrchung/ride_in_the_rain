@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://1gksp40cof8k" path="res://assets/ui/speedometer_arm.png" id="10_54bol"]
 [ext_resource type="Texture2D" uid="uid://bjbt6avfuuikd" path="res://assets/text/three.png" id="13_htrb5"]
 [ext_resource type="PackedScene" uid="uid://xola47y16src" path="res://track_dev.tscn" id="13_qqrku"]
-[ext_resource type="PackedScene" uid="uid://strvpwv4qfcc" path="res://post_process_vhs.tscn" id="16_0dkb4"]
+[ext_resource type="PackedScene" path="res://post_process_vhs.tscn" id="16_0dkb4"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a0xp4"]
 panorama = ExtResource("7_4ydi2")
@@ -201,7 +201,7 @@ cull_mask = 1048573
 projection = 1
 current = true
 script = ExtResource("5_ey4rv")
-follow_scan_radius = 100.0
+follow_scan_radius = 250.0
 player_target = NodePath("../../../../../Bicycle")
 player_rotation_target = NodePath("../../../../../Bicycle")
 
