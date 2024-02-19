@@ -3,6 +3,11 @@ extends Node3D
 var start_time = 0
 var end_time = 0
 
+const tex_three = preload("res://assets/text/three.png")
+const tex_two = preload("res://assets/text/two.png")
+const tex_one = preload("res://assets/text/one.png")
+const tex_go = preload("res://assets/text/go_weeb.png")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var win = get_window()
@@ -13,10 +18,7 @@ func _ready():
 func _process(delta):
 	if $StartTimer.time_left > 0:
 		var seconds = int($StartTimer.time_left)
-		if seconds == 0:
-			$Hud/StartLabel.text = "Go!!"
-		else: 
-			$Hud/StartLabel.text = str(seconds)
+		$Hud/PopupInfo.set_texture([tex_go, tex_one, tex_two, tex_three][seconds])
 	else:
 		# LMAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO fk
 		$Bicycle.should_reset = false
@@ -82,7 +84,7 @@ func lose_game():
 @rpc("call_local")
 func restart_game(time):
 	$StartTimer.start(3.999)
-	$Hud/StartLabel.show()
+	$Hud/PopupInfo.show()
 	$WinUi.hide()
 	$LoseUi.hide()
 	if multiplayer.is_server():
@@ -104,7 +106,7 @@ func _on_leave_button_pressed():
 func _on_start_timer_timeout():
 	if multiplayer.is_server():
 		start_time = Time.get_unix_time_from_system()
-	$Hud/StartLabel.hide()
+	$Hud/PopupInfo.hide()
 	$Bicycle.should_reset = false
 	
 
