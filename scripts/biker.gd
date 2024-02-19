@@ -29,6 +29,10 @@ func _input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if multiplayer.is_server():
+		# Tell others about biker stuff
+		update_biker.rpc(current_lean, current_force)
+	
 	if multiplayer.get_unique_id() != peer_id:
 		return
 	
@@ -82,8 +86,9 @@ func _process(delta):
 		if(current_force < 0):
 			current_force = 0
 			
-		
+	# Tell server about your personal changes
 	update_biker.rpc_id(1, current_lean, current_force)
+		
 	rider.rotation.z = -deg_to_rad(current_lean)
 		
 @rpc("any_peer", "call_local")
