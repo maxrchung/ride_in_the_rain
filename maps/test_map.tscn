@@ -1,33 +1,30 @@
-[gd_scene load_steps=20 format=3 uid="uid://bboibipxo6flu"]
+[gd_scene load_steps=19 format=3 uid="uid://bboibipxo6flu"]
 
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
 [ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="3_a57eh"]
 [ext_resource type="Texture2D" uid="uid://djytkt442qiqt" path="res://icon.svg" id="4_8if12"]
-[ext_resource type="Texture2D" uid="uid://cb8ixjsjmdt27" path="res://minimap.png" id="5_2hi0p"]
 [ext_resource type="Script" path="res://maps/minimap.gd" id="5_ey4rv"]
-[ext_resource type="Shader" path="res://maps/minimap.gdshader" id="5_oog66"]
 [ext_resource type="PackedScene" uid="uid://cy54or8degxgl" path="res://assets/models/track_dev.glb" id="6_pcrmm"]
 [ext_resource type="Texture2D" uid="uid://cdqnmaxdommg5" path="res://assets/skybox/whipple_creek_regional_park_04_4k.exr" id="7_4ydi2"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sw86o"]
-emission_shape_offset = Vector3(0, 8, 0)
 emission_shape = 3
 emission_box_extents = Vector3(32, 0, 64)
 direction = Vector3(0, -1, 0)
 spread = 0.0
-initial_velocity_min = 32.0
-initial_velocity_max = 32.0
+initial_velocity_min = 8.0
+initial_velocity_max = 8.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2c04q"]
 transparency = 3
 alpha_hash_scale = 1.0
 alpha_antialiasing_mode = 0
-albedo_color = Color(0.619608, 0.254902, 0.552941, 0.603922)
+albedo_color = Color(0.493745, 0.597054, 0.938991, 0.603922)
 
 [sub_resource type="SphereMesh" id="SphereMesh_qccq2"]
 material = SubResource("StandardMaterial3D_2c04q")
-radius = 0.04
+radius = 0.01
 height = 0.04
 radial_segments = 8
 rings = 2
@@ -47,9 +44,14 @@ shader_parameter/background_color = Color(1, 1, 1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_eigu5"]
 size = Vector3(33.6801, 41.8364, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dp04w"]
-shader = ExtResource("5_oog66")
-shader_parameter/radius = 1.0
+[sub_resource type="ViewportTexture" id="ViewportTexture_0pe7u"]
+
+[sub_resource type="Environment" id="Environment_uk4f5"]
+reflected_light_source = 1
+tonemap_mode = 3
+adjustment_brightness = 5.2
+adjustment_contrast = 3.9
+adjustment_saturation = 0.01
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a0xp4"]
 panorama = ExtResource("7_4ydi2")
@@ -61,6 +63,15 @@ sky_material = SubResource("PanoramaSkyMaterial_a0xp4")
 background_mode = 2
 background_energy_multiplier = 0.1
 sky = SubResource("Sky_kgvh6")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 3
+ssr_enabled = true
+ssr_max_steps = 32
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.03
+volumetric_fog_albedo = Color(0.247059, 0.372549, 0.509804, 1)
 
 [node name="TestMap" type="Node3D"]
 script = ExtResource("1_0a3d1")
@@ -69,14 +80,14 @@ script = ExtResource("1_0a3d1")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 46.6844, 1.26458, 42.8507)
 
 [node name="Camera3D" type="Camera3D" parent="Bicycle"]
-transform = Transform3D(-1, 6.88901e-08, -5.38228e-08, 0, 0.615662, 0.788011, 8.74228e-08, 0.788011, -0.615662, 0, 14, -9)
+transform = Transform3D(-1, 1.04927e-07, 3.03398e-08, 8.9295e-08, 0.625392, 0.78031, 6.29014e-08, 0.78031, -0.625392, 0, 14, -9)
 
 [node name="Rain" type="GPUParticles3D" parent="Bicycle/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 0.173648, -0.984808, 0, 0.984808, 0.173648, 0, 48, 0)
+transform = Transform3D(1, -1.18274e-08, -6.76452e-09, 1.36908e-09, 0.581186, -0.813772, 1.35561e-08, 0.813772, 0.581186, 1.52588e-05, 47.0939, -33.0374)
 layers = 2
 extra_cull_margin = 16384.0
 ignore_occlusion_culling = true
-amount = 50000
+amount = 25000
 lifetime = 2.0
 preprocess = 3.0
 fixed_fps = 15
@@ -219,10 +230,9 @@ offset_left = 23.0
 offset_top = 431.0
 offset_right = 223.0
 offset_bottom = 631.0
-texture = ExtResource("5_2hi0p")
+texture = SubResource("ViewportTexture_0pe7u")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="TextureRect"]
-material = SubResource("ShaderMaterial_dp04w")
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 200.0
@@ -230,12 +240,15 @@ offset_bottom = 200.0
 [node name="SubViewport" type="SubViewport" parent="TextureRect/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
+scaling_3d_mode = 1
+scaling_3d_scale = 0.75
 size = Vector2i(200, 200)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="TextureRect/SubViewportContainer/SubViewport"]
 transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, 1, 8.74228e-08, 1, -4.37114e-08, 46.684, 12.45, 42.851)
-cull_mask = 1048573
+cull_mask = 512
+environment = SubResource("Environment_uk4f5")
 projection = 1
 script = ExtResource("5_ey4rv")
 follow_scan_radius = 100.0

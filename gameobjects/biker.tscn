@@ -1,13 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://bdt4rqfmaofl6"]
 
 [ext_resource type="Script" path="res://scripts/biker.gd" id="1_ss0e7"]
-[ext_resource type="PackedScene" uid="uid://cj6p3lq2laa0t" path="res://assets/models/player_model.glb" id="2_0hrfo"]
+[ext_resource type="PackedScene" uid="uid://cg2kldu7u4oic" path="res://assets/models/player_model.glb" id="2_0hrfo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iflgf"]
 radius = 1.22105
 height = 4.30186
 
 [node name="Biker" type="RigidBody3D"]
+axis_lock_linear_y = true
 gravity_scale = 0.0
 script = ExtResource("1_ss0e7")
 

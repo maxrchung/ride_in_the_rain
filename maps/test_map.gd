@@ -5,6 +5,7 @@ var end_time = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	var win = get_window()
 	if multiplayer.is_server():
 		restart_game.rpc(Time.get_unix_time_from_system())
 
