@@ -10,6 +10,14 @@ func _ready():
 func _process(delta):
 	pass
 
-
 func click_button():
 	$ClickButton.play()
+
+func game_over():
+	$GameOver.play()
+
+func cheer():
+	$Cheer.play()
+
+func engine():
+	$Engine.play()

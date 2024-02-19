@@ -64,6 +64,7 @@ func _on_end_area_body_entered(body):
 		
 @rpc("call_local")
 func win_game(time):
+	Sfx.cheer()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$FinishTimer.start(3.999)
 	$Hud/FinishLabel.show()
@@ -74,6 +75,7 @@ func win_game(time):
 		
 @rpc("call_local")
 func lose_game():
+	Sfx.game_over()
 	$Bicycle.crash()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$LoseUi.show()
@@ -83,6 +85,7 @@ func lose_game():
 
 @rpc("call_local")
 func restart_game(time):
+	Sfx.engine()
 	$StartTimer.start(3.999)
 	$Hud/PopupInfo.show()
 	$WinUi.hide()
