@@ -10,13 +10,14 @@ var rider
 @export var kb_lean_factor = 300
 @export var kb_speed = 20
 var input_vel = Vector2.ZERO
-@export var mouse_lean = 5
+@export var mouse_lean = 7
 @export var mouse_speed = 1
 var mouse_vel = Vector2.ZERO
 @export var pedal_speed = 2
 @export var is_front = false
 @export var is_rear = false
-@export var scroll_speed = 6
+@export var scroll_speed = 4.5
+@export var decay_speed = 18
 
 # This is assigned a unique peer ID on multiplayer connection
 var peer_id = 0
@@ -70,7 +71,7 @@ func _process(delta):
 				input_vel.y = max_force
 		else:
 			if(input_vel.y > 0):
-				input_vel.y -= kb_speed * delta * 0.8
+				input_vel.y -= decay_speed * delta
 			else:
 				input_vel.y = 0
 	else:
@@ -83,8 +84,10 @@ func _process(delta):
 		
 		input_vel.x = -mouse_vel.x * mouse_lean
 		input_vel.y += abs(mouse_vel.y) * delta * mouse_speed
+		if input_vel.y > max_force:
+			input_vel.y = max_force
 		if(input_vel.y > 0):
-			input_vel.y -= kb_speed * delta * 0.8
+			input_vel.y -= decay_speed * delta
 		else:
 			input_vel.y = 0
 	
