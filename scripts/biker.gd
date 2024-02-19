@@ -43,6 +43,8 @@ func _process(delta):
 		update_biker.rpc(current_lean, current_force)
 	
 	if multiplayer.get_unique_id() != peer_id:
+		get_node("player_model/AnimationPlayer").speed_scale = (current_force/max_force) * pedal_speed
+		rider.rotation.z = -deg_to_rad(current_lean)
 		return
 	
 	
