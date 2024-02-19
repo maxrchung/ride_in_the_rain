@@ -37,6 +37,8 @@ func _process(delta):
 		$Hud/TimeText.text = format_time(Time.get_unix_time_from_system() - start_time)
 
 	$Hud/SpeedText.text = str(int($Bicycle.linear_velocity.length())) + " km/h"
+	var speed_abs = $Bicycle.linear_velocity.length() / 30
+	$Hud/SpeedometerBg/SpeedometerArm.rotation_degrees = (speed_abs * (162)) - 87 
 
 func format_time(time):
 	var minutes = int(time / 60)
