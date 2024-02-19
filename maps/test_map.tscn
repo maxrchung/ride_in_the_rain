@@ -1,10 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://bboibipxo6flu"]
+[gd_scene load_steps=20 format=3 uid="uid://bboibipxo6flu"]
 
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
 [ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="3_a57eh"]
 [ext_resource type="Texture2D" uid="uid://djytkt442qiqt" path="res://icon.svg" id="4_8if12"]
+[ext_resource type="Texture2D" uid="uid://cb8ixjsjmdt27" path="res://minimap.png" id="5_2hi0p"]
 [ext_resource type="Script" path="res://maps/minimap.gd" id="5_ey4rv"]
+[ext_resource type="Shader" path="res://maps/minimap.gdshader" id="5_oog66"]
 [ext_resource type="PackedScene" uid="uid://cy54or8degxgl" path="res://assets/models/track_dev.glb" id="6_pcrmm"]
 [ext_resource type="Texture2D" uid="uid://cdqnmaxdommg5" path="res://assets/skybox/whipple_creek_regional_park_04_4k.exr" id="7_4ydi2"]
 
@@ -45,7 +47,9 @@ shader_parameter/background_color = Color(1, 1, 1, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_eigu5"]
 size = Vector3(33.6801, 41.8364, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0pe7u"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dp04w"]
+shader = ExtResource("5_oog66")
+shader_parameter/radius = 1.0
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a0xp4"]
 panorama = ExtResource("7_4ydi2")
@@ -215,9 +219,10 @@ offset_left = 23.0
 offset_top = 431.0
 offset_right = 223.0
 offset_bottom = 631.0
-texture = SubResource("ViewportTexture_0pe7u")
+texture = ExtResource("5_2hi0p")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="TextureRect"]
+material = SubResource("ShaderMaterial_dp04w")
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 200.0
