@@ -106,6 +106,10 @@ func reset():
 func add_bikers(amt):
 	for i in amt:
 		var biker_instance = biker_res.instantiate()
+		if i == 0:
+			biker_instance.is_front = true
+		if i == amt-1:
+			biker_instance.is_rear = true
 		biker_instance.peer_id = GlobalCrap.players[i]
 		var name = "Biker" + str(GlobalCrap.players[i])
 		biker_instance.name = name

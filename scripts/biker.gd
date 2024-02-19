@@ -15,12 +15,18 @@ var kb_input = false
 @export var mouse_speed = 1
 var mouse_vel = Vector2.ZERO
 @export var pedal_speed = 2
+@export var is_front = false
+@export var is_rear = false
 
 # This is assigned a unique peer ID on multiplayer connection
 var peer_id = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if is_front:
+		get_node("FrontLight").visible = true
+	if is_rear:
+		get_node("RearLight").visible = true
 	rider = get_node("rider")
 	if multiplayer.get_unique_id() != peer_id:
 		rider.material = null

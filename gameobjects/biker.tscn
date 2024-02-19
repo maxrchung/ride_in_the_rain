@@ -11,7 +11,6 @@ height = 4.30186
 albedo_color = Color(0.992157, 0.443137, 0.792157, 1)
 
 [node name="Biker" type="RigidBody3D"]
-axis_lock_linear_y = true
 gravity_scale = 0.0
 script = ExtResource("1_ss0e7")
 
@@ -25,3 +24,18 @@ shape = SubResource("CapsuleShape3D_iflgf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.20059, 0)
 size = Vector3(1, 2.7345, 1)
 material = SubResource("StandardMaterial3D_de0e6")
+
+[node name="FrontLight" type="SpotLight3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, -1.56269e-08, 0.983894, 0.178751, 8.60148e-08, 0.178751, -0.983894, 0, 2.20254, 0.638387)
+visible = false
+light_energy = 100.0
+light_volumetric_fog_energy = 10.0
+spot_range = 241.772
+
+[node name="RearLight" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.980192, 0.198051, 0, -0.198051, 0.980192, 0, 2.20051, -0.871384)
+visible = false
+light_color = Color(1, 0, 0, 1)
+light_energy = 100.0
+light_volumetric_fog_energy = 10.0
+spot_range = 546.587
