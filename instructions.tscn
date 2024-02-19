@@ -1,8 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvmas5ch5l50f"]
+[gd_scene load_steps=9 format=3 uid="uid://dvmas5ch5l50f"]
 
 [ext_resource type="Script" path="res://instructions.gd" id="1_kl63e"]
 [ext_resource type="Texture2D" uid="uid://js6n6pfo757k" path="res://instructions.png" id="1_mvjj4"]
 [ext_resource type="Texture2D" uid="uid://c6kqt565xga07" path="res://assets/ui/btn_leave_game.png" id="2_vsitt"]
+[ext_resource type="Texture2D" uid="uid://cdqnmaxdommg5" path="res://assets/skybox/whipple_creek_regional_park_04_4k.exr" id="4_yyahu"]
+[ext_resource type="PackedScene" path="res://post_process_vhs.tscn" id="5_088o2"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kl5nr"]
+panorama = ExtResource("4_yyahu")
+
+[sub_resource type="Sky" id="Sky_kgvh6"]
+sky_material = SubResource("PanoramaSkyMaterial_kl5nr")
+
+[sub_resource type="Environment" id="Environment_bch03"]
+background_mode = 2
+background_energy_multiplier = 0.1
+sky = SubResource("Sky_kgvh6")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 3
+ssr_enabled = true
+ssr_max_steps = 32
+glow_enabled = true
+volumetric_fog_density = 0.03
+volumetric_fog_albedo = Color(0.247059, 0.372549, 0.509804, 1)
 
 [node name="Instructions" type="CanvasLayer"]
 script = ExtResource("1_kl63e")
@@ -20,5 +41,10 @@ offset_right = 541.0
 offset_bottom = 1003.0
 scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("2_vsitt")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bch03")
+
+[node name="PostProcess_VHS" parent="." instance=ExtResource("5_088o2")]
 
 [connection signal="pressed" from="LeaveButton" to="." method="_on_leave_button_pressed"]
