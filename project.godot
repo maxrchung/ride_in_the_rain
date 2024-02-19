@@ -18,6 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 GlobalCrap="*res://global_crap.gd"
+Bgm="*res://bgm.tscn"
+Sfx="*res://sfx.tscn"
 
 [display]
 

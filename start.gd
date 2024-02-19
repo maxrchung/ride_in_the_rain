@@ -91,9 +91,11 @@ func _on_server_disconnected():
 	$PlayersCount.hide()
 
 func _on_create_button_pressed():
+	Sfx.click_button()
 	create_game()
 
 func _on_join_button_pressed():
+	Sfx.click_button()
 	join_game($IpInput.text)
 
 @rpc("call_local")
@@ -102,9 +104,11 @@ func load_game():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _on_start_button_pressed():
+	Sfx.click_button()
 	load_game.rpc()
 
 func _on_leave_button_pressed():
+	Sfx.click_button()
 	multiplayer.multiplayer_peer = null
 	GlobalCrap.players = [1]
 	$IpInput.show()

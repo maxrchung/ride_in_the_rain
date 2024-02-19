@@ -91,12 +91,15 @@ func restart_game(time):
 		$Bicycle.reset()
 
 func _on_play_again_button_pressed():
+	Sfx.click_button()
 	restart_game.rpc(Time.get_unix_time_from_system())
 
 func _on_try_again_button_pressed():
+	Sfx.click_button()
 	restart_game.rpc(Time.get_unix_time_from_system())
 
 func _on_leave_button_pressed():
+	Sfx.click_button()
 	multiplayer.multiplayer_peer = null
 	get_tree().change_scene_to_file("start.tscn")
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE

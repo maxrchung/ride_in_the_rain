@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvmrnmhk3lcxc"]
+
+[ext_resource type="Script" path="res://sfx.gd" id="1_21ens"]
+[ext_resource type="AudioStream" uid="uid://i342jcmac2e" path="res://tutorial_assets/art/gameover.wav" id="2_unx1q"]
+
+[node name="Sfx" type="Node"]
+script = ExtResource("1_21ens")
+
+[node name="ClickButton" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_unx1q")

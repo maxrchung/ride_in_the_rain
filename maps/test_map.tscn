@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://cb8ixjsjmdt27" path="res://minimap.png" id="5_vosp2"]
 [ext_resource type="Shader" path="res://maps/minimap.gdshader" id="6_2phuh"]
 [ext_resource type="PackedScene" uid="uid://dgqlbnpna5a33" path="res://assets/models/goal.glb" id="6_k6a8r"]
-[ext_resource type="PackedScene" uid="uid://cy54or8degxgl" path="res://assets/models/track_dev.glb" id="6_pcrmm"]
 [ext_resource type="Texture2D" uid="uid://cdqnmaxdommg5" path="res://assets/skybox/whipple_creek_regional_park_04_4k.exr" id="7_4ydi2"]
 [ext_resource type="Texture2D" uid="uid://6yl14rwg2u4j" path="res://indicator.png" id="7_7y5m3"]
 [ext_resource type="Texture2D" uid="uid://c75edv10pbfa6" path="res://assets/ui/speedometer_bg.png" id="9_833qe"]
