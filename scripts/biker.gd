@@ -21,7 +21,8 @@ var peer_id = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rider = get_node("rider")
-	pass # Replace with function body.
+	if multiplayer.get_unique_id() != peer_id:
+		rider.material = null
 
 func _input(event):
 	if event is InputEventMouseMotion:
