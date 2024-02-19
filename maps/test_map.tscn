@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bboibipxo6flu"]
+[gd_scene load_steps=23 format=3 uid="uid://bboibipxo6flu"]
 
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://cy54or8degxgl" path="res://assets/models/track_dev.glb" id="6_pcrmm"]
 [ext_resource type="Texture2D" uid="uid://cdqnmaxdommg5" path="res://assets/skybox/whipple_creek_regional_park_04_4k.exr" id="7_4ydi2"]
 [ext_resource type="Texture2D" uid="uid://6yl14rwg2u4j" path="res://indicator.png" id="7_7y5m3"]
+[ext_resource type="Texture2D" uid="uid://c75edv10pbfa6" path="res://assets/ui/speedometer_bg.png" id="9_833qe"]
+[ext_resource type="Texture2D" uid="uid://1gksp40cof8k" path="res://assets/ui/speedometer_arm.png" id="10_54bol"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sw86o"]
 emission_shape = 3
@@ -79,6 +81,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 46.684
 
 [node name="Camera3D" type="Camera3D" parent="Bicycle"]
 transform = Transform3D(-1, 1.04927e-07, 3.03398e-08, 8.9295e-08, 0.625392, 0.78031, 6.29014e-08, 0.78031, -0.625392, 0, 14, -9)
+current = true
 
 [node name="Rain" type="GPUParticles3D" parent="Bicycle/Camera3D"]
 transform = Transform3D(1, -1.18274e-08, -6.76452e-09, 1.36908e-09, 0.581186, -0.813772, 1.35561e-08, 0.813772, 0.581186, 1.52588e-05, 47.0939, -33.0374)
@@ -215,43 +218,36 @@ offset_right = 568.0
 offset_bottom = 303.0
 text = "FINISH!"
 
-[node name="StartTimer" type="Timer" parent="."]
-wait_time = 3.999
-one_shot = true
-
-[node name="FinishTimer" type="Timer" parent="."]
-wait_time = 3.999
-one_shot = true
-
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="Hud"]
 offset_left = 23.0
 offset_top = 431.0
 offset_right = 223.0
 offset_bottom = 631.0
 texture = ExtResource("5_vosp2")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="TextureRect"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Hud/TextureRect"]
 material = SubResource("ShaderMaterial_dxl2j")
 layout_mode = 0
 offset_right = 200.0
 offset_bottom = 200.0
 
-[node name="SubViewport" type="SubViewport" parent="TextureRect/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="Hud/TextureRect/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(200, 200)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="TextureRect/SubViewportContainer/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="Hud/TextureRect/SubViewportContainer/SubViewport"]
 transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 46.684, 12.45, 42.851)
 cull_mask = 1048573
 projection = 1
+current = true
 script = ExtResource("5_ey4rv")
 follow_scan_radius = 100.0
-player_target = NodePath("../../../../Bicycle")
-player_rotation_target = NodePath("../../../../Bicycle")
+player_target = NodePath("../../../../../Bicycle")
+player_rotation_target = NodePath("../../../../../Bicycle")
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect"]
+[node name="TextureRect" type="TextureRect" parent="Hud/TextureRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -265,6 +261,34 @@ offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_7y5m3")
+
+[node name="SpeedometerBg" type="TextureRect" parent="Hud"]
+offset_left = 756.0
+offset_top = 227.0
+offset_right = 1268.0
+offset_bottom = 739.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(256, 256)
+texture = ExtResource("9_833qe")
+
+[node name="SpeedometerArm" type="TextureRect" parent="Hud/SpeedometerBg"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 8.0
+offset_right = 526.0
+offset_bottom = 520.0
+rotation = -1.51844
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(237.21, 376.585)
+texture = ExtResource("10_54bol")
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 3.999
+one_shot = true
+
+[node name="FinishTimer" type="Timer" parent="."]
+wait_time = 3.999
+one_shot = true
 
 [node name="track_dev" parent="." instance=ExtResource("6_pcrmm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.0864)

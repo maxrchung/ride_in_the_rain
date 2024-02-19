@@ -1,60 +1,72 @@
-[gd_scene load_steps=2 format=3 uid="uid://0mueab7w8f21"]
+[gd_scene load_steps=7 format=3 uid="uid://0mueab7w8f21"]
 
 [ext_resource type="Script" path="res://start.gd" id="1_u02kx"]
+[ext_resource type="Texture2D" uid="uid://cuv4gbgva6c1a" path="res://assets/ui/btn_create_game.png" id="2_x0q0c"]
+[ext_resource type="Texture2D" uid="uid://cip1sn2wflgem" path="res://assets/ui/btn_start_game.png" id="3_38bn3"]
+[ext_resource type="Texture2D" uid="uid://bhn7j2ssbui2d" path="res://assets/ui/btn_join_game.png" id="3_hde24"]
+[ext_resource type="Texture2D" uid="uid://c6kqt565xga07" path="res://assets/ui/btn_leave_game.png" id="4_5v2yp"]
+
+[sub_resource type="Theme" id="Theme_vnyu2"]
 
 [node name="Game" type="CanvasLayer"]
 script = ExtResource("1_u02kx")
 
-[node name="CreateButton" type="Button" parent="."]
-offset_left = 410.0
-offset_top = 384.0
-offset_right = 516.0
-offset_bottom = 415.0
-text = "Create game"
+[node name="CreateButton" type="TextureButton" parent="."]
+offset_left = 442.0
+offset_top = 99.0
+offset_right = 954.0
+offset_bottom = 611.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("2_x0q0c")
 
-[node name="StartButton" type="Button" parent="."]
+[node name="StartButton" type="TextureButton" parent="."]
 visible = false
-offset_left = 450.0
-offset_top = 421.0
-offset_right = 598.0
-offset_bottom = 452.0
-text = ">>>Start game<<<"
+offset_left = 997.0
+offset_top = 485.0
+offset_right = 1509.0
+offset_bottom = 997.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("3_38bn3")
 
-[node name="LeaveButton" type="Button" parent="."]
+[node name="LeaveButton" type="TextureButton" parent="."]
 visible = false
-offset_left = 591.0
-offset_top = 316.0
-offset_right = 739.0
-offset_bottom = 347.0
-text = "Leave The Game"
+offset_left = 29.0
+offset_top = 491.0
+offset_right = 541.0
+offset_bottom = 1003.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("4_5v2yp")
 
-[node name="JoinButton" type="Button" parent="."]
-offset_left = 311.0
-offset_top = 140.0
-offset_right = 396.0
-offset_bottom = 171.0
-text = "Join game"
+[node name="JoinButton" type="TextureButton" parent="."]
+offset_left = 303.0
+offset_top = 101.0
+offset_right = 815.0
+offset_bottom = 613.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("3_hde24")
 
-[node name="IpInput" type="TextEdit" parent="."]
+[node name="IpInput" type="LineEdit" parent="."]
 offset_left = 88.0
 offset_top = 140.0
 offset_right = 298.0
 offset_bottom = 177.0
+theme = SubResource("Theme_vnyu2")
+placeholder_text = "IP Address"
 
 [node name="WaitingText" type="Label" parent="."]
 visible = false
-offset_left = 519.0
-offset_top = 142.0
-offset_right = 694.0
-offset_bottom = 165.0
+offset_left = 464.0
+offset_top = 47.0
+offset_right = 639.0
+offset_bottom = 70.0
 text = "Waiting..."
 
 [node name="PlayersCount" type="Label" parent="."]
 visible = false
-offset_left = 160.0
-offset_top = 332.0
-offset_right = 225.0
-offset_bottom = 355.0
+offset_left = 31.0
+offset_top = 26.0
+offset_right = 96.0
+offset_bottom = 49.0
 text = "Players: "
 
 [connection signal="pressed" from="CreateButton" to="." method="_on_create_button_pressed"]
