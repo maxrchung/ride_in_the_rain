@@ -11,7 +11,9 @@ var rider
 @export var kb_speed = 20
 var input_vel = Vector2.ZERO
 var kb_input = false
-@export var mouse_speed = 0.35
+@export var mouse_lean = 5
+@export var mouse_speed = 1
+var mouse_vel = Vector2.ZERO
 
 # This is assigned a unique peer ID on multiplayer connection
 var peer_id = 0
@@ -21,6 +23,10 @@ func _ready():
 	rider = get_node("rider")
 	pass # Replace with function body.
 
+func _input(event):
+	if event is InputEventMouseMotion:
+		mouse_vel = event.relative
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if multiplayer.get_unique_id() != peer_id:
@@ -28,10 +34,10 @@ func _process(delta):
 	
 	
 	input_vel.x = 0
-	
 	if Input.is_action_just_pressed("change_control_scheme"):
 		kb_input = !kb_input
 	if(kb_input):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		if Input.is_action_pressed("kb_right"):
 			input_vel.x -= kb_lean_factor
 		if Input.is_action_pressed("kb_left"):
@@ -47,11 +53,12 @@ func _process(delta):
 			else:
 				input_vel.y = 0
 	else:
-		var mouse_pos = get_viewport().get_mouse_position()
-		var mouse_vel = get_viewport().get_visible_rect().size/2 - mouse_pos
-		Input.warp_mouse(get_viewport().get_visible_rect().size/2)
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		#var mouse_pos = get_viewport().get_mouse_position()
+		#var mouse_vel = get_viewport().get_visible_rect().size/2 - mouse_pos
+		#Input.warp_mouse(get_viewport().get_visible_rect().size/2)
 		#input_vel = mouse_vel
-		input_vel.x = mouse_vel.x * 2
+		input_vel.x = -mouse_vel.x * mouse_lean
 		input_vel.y += abs(mouse_vel.y) * delta * mouse_speed
 		if(input_vel.y > 0):
 			input_vel.y -= kb_speed * delta * 0.8
