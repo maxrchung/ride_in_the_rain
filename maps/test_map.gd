@@ -69,6 +69,7 @@ func _on_end_area_body_entered(body):
 @rpc("call_local")
 func win_game(time):
 	Sfx.cheer()
+	$Bicycle.crash()
 	$FinishTimer.start(3.999)
 	$Hud/FinishLabel.show()
 	end_time = time
