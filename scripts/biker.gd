@@ -14,6 +14,7 @@ var kb_input = false
 @export var mouse_lean = 5
 @export var mouse_speed = 1
 var mouse_vel = Vector2.ZERO
+@export var pedal_speed = 2
 
 # This is assigned a unique peer ID on multiplayer connection
 var peer_id = 0
@@ -21,6 +22,7 @@ var peer_id = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rider = get_node("rider")
+	get_node("player_model/AnimationPlayer").play("spokesAction_001")
 	pass # Replace with function body.
 
 func _input(event):
@@ -88,7 +90,7 @@ func _process(delta):
 			
 	# Tell server about your personal changes
 	update_biker.rpc_id(1, current_lean, current_force)
-		
+	get_node("player_model/AnimationPlayer").speed_scale = (current_force/max_force) * pedal_speed
 	rider.rotation.z = -deg_to_rad(current_lean)
 		
 @rpc("any_peer", "call_local")
