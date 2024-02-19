@@ -14,6 +14,9 @@ var current_dir = 0
 var biker_res = preload("res://gameobjects/biker.tscn")
 var forward_vector = Vector3.ZERO
 
+# We display this on HUD, it's linear_velocity.length()
+var speed = 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,6 +30,12 @@ func _physics_process(delta):
 	var angular_force = Vector3.ZERO
 	angular_force.y = current_lean
 	apply_torque(angular_force)
+	
+	
+var should_reset = false
+func _integrate_forces(state):
+	if should_reset:
+		state.transform = get_node("../StartPosition").transform
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -65,8 +74,8 @@ func _process(delta):
 	#rotation.y += deg_to_rad(current_lean * delta * (current_velocity/handling))
 	##current_velocity -= ((current_velocity * friction) + 10 + abs(current_lean)) * delta
 	
-		
-	update_bicycle.rpc(position, rotation, current_velocity)
+	speed = linear_velocity.length()
+	update_bicycle.rpc(position, rotation, linear_velocity.length())
 	
 @rpc("call_local")
 func resync_bikers():
@@ -79,17 +88,20 @@ func resync_bikers():
 	add_bikers(playerCount)
 
 @rpc
-func update_bicycle(new_position, new_rotation, new_velocity):
+func update_bicycle(new_position, new_rotation, new_speed):
 	position = new_position
 	rotation = new_rotation
-	current_velocity = new_velocity
+	speed = new_speed
 
 func reset():
 	position = get_node("../StartPosition").position
 	rotation = get_node("../StartPosition").rotation
-	current_velocity = 0
+	should_reset = true
+	current_velocity   = 0
 	current_lean = 0
-	resync_bikers()
+	current_force = 0
+	speed = 0
+	resync_bikers.rpc()
 
 func add_bikers(amt):
 	for i in amt:

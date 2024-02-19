@@ -12,10 +12,10 @@
 script = ExtResource("1_u02kx")
 
 [node name="CreateButton" type="TextureButton" parent="."]
-offset_left = 442.0
-offset_top = 99.0
-offset_right = 954.0
-offset_bottom = 611.0
+offset_left = 798.0
+offset_top = 356.0
+offset_right = 1310.0
+offset_bottom = 868.0
 scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("2_x0q0c")
 
@@ -38,18 +38,18 @@ scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("4_5v2yp")
 
 [node name="JoinButton" type="TextureButton" parent="."]
-offset_left = 303.0
-offset_top = 101.0
-offset_right = 815.0
-offset_bottom = 613.0
+offset_left = 336.0
+offset_top = 356.0
+offset_right = 848.0
+offset_bottom = 868.0
 scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("3_hde24")
 
 [node name="IpInput" type="LineEdit" parent="."]
-offset_left = 88.0
-offset_top = 140.0
-offset_right = 298.0
-offset_bottom = 177.0
+offset_left = 121.0
+offset_top = 395.0
+offset_right = 331.0
+offset_bottom = 432.0
 theme = SubResource("Theme_vnyu2")
 placeholder_text = "IP Address"
 

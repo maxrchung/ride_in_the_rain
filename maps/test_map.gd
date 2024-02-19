@@ -37,8 +37,8 @@ func _process(delta):
 	else:
 		$Hud/TimeText.text = format_time(Time.get_unix_time_from_system() - start_time)
 
-	$Hud/SpeedText.text = str(int($Bicycle.linear_velocity.length())) + " km/h"
-	var speed_abs = $Bicycle.linear_velocity.length() / 30
+	$Hud/SpeedText.text = str(int($Bicycle.speed)) + " km/h"
+	var speed_abs = $Bicycle.speed / 30
 	$Hud/SpeedometerBg/SpeedometerArm.rotation_degrees = (speed_abs * (162)) - 87 
 
 func format_time(time):
@@ -99,6 +99,8 @@ func _on_start_timer_timeout():
 	if multiplayer.is_server():
 		start_time = Time.get_unix_time_from_system()
 	$Hud/StartLabel.hide()
+	$Bicycle.should_reset = false
+	
 
 func _on_finish_timer_timeout():
 	$Hud/FinishLabel.hide()
