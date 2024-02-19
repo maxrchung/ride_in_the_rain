@@ -1,9 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://bboibipxo6flu"]
+[gd_scene load_steps=25 format=3 uid="uid://bboibipxo6flu"]
 
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
 [ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="3_a57eh"]
 [ext_resource type="Texture2D" uid="uid://djytkt442qiqt" path="res://icon.svg" id="4_8if12"]
+[ext_resource type="Theme" uid="uid://ckvowov5bcv6l" path="res://default_ui_theme.tres" id="5_ee383"]
+[ext_resource type="LabelSettings" uid="uid://cuiayxv1yxm7a" path="res://default_font.tres" id="5_evluj"]
 [ext_resource type="Script" path="res://maps/minimap.gd" id="5_ey4rv"]
 [ext_resource type="Texture2D" uid="uid://cb8ixjsjmdt27" path="res://minimap.png" id="5_vosp2"]
 [ext_resource type="Shader" path="res://maps/minimap.gdshader" id="6_2phuh"]
@@ -116,6 +118,7 @@ offset_top = 160.0
 offset_right = 492.0
 offset_bottom = 183.0
 text = "Hey you won congrats"
+label_settings = ExtResource("5_evluj")
 
 [node name="PlayAgainButton" type="Button" parent="WinUi"]
 visible = false
@@ -123,6 +126,7 @@ offset_left = 320.0
 offset_top = 229.0
 offset_right = 407.0
 offset_bottom = 260.0
+theme = ExtResource("5_ee383")
 text = "Play again"
 
 [node name="LeaveButton" type="Button" parent="WinUi"]
@@ -130,6 +134,7 @@ offset_left = 462.0
 offset_top = 246.0
 offset_right = 515.0
 offset_bottom = 277.0
+theme = ExtResource("5_ee383")
 text = "Leave"
 
 [node name="LoseUi" type="CanvasLayer" parent="."]
@@ -175,32 +180,36 @@ disabled = true
 [node name="Hud" type="CanvasLayer" parent="."]
 
 [node name="SpeedLabel" type="Label" parent="Hud"]
-offset_left = 30.0
-offset_top = 49.0
-offset_right = 82.0
-offset_bottom = 72.0
+offset_left = 26.0
+offset_top = 57.0
+offset_right = 111.0
+offset_bottom = 108.0
 text = "Speed:"
+label_settings = ExtResource("5_evluj")
 
 [node name="SpeedText" type="Label" parent="Hud"]
-offset_left = 98.0
-offset_top = 50.0
-offset_right = 138.0
-offset_bottom = 73.0
+offset_left = 131.0
+offset_top = 67.0
+offset_right = 171.0
+offset_bottom = 116.0
 text = "0"
+label_settings = ExtResource("5_evluj")
 
 [node name="TimeLabel" type="Label" parent="Hud"]
-offset_left = 133.0
-offset_top = 14.0
-offset_right = 176.0
-offset_bottom = 37.0
+offset_left = 31.0
+offset_top = 8.0
+offset_right = 112.0
+offset_bottom = 59.0
 text = "Time:"
+label_settings = ExtResource("5_evluj")
 
 [node name="TimeText" type="Label" parent="Hud"]
-offset_left = 189.0
+offset_left = 139.0
 offset_top = 17.0
-offset_right = 229.0
-offset_bottom = 40.0
+offset_right = 179.0
+offset_bottom = 66.0
 text = "0"
+label_settings = ExtResource("5_evluj")
 
 [node name="StartLabel" type="Label" parent="Hud"]
 visible = false
@@ -209,6 +218,7 @@ offset_top = 249.0
 offset_right = 537.0
 offset_bottom = 272.0
 text = "3"
+label_settings = ExtResource("5_evluj")
 
 [node name="FinishLabel" type="Label" parent="Hud"]
 visible = false
@@ -217,6 +227,7 @@ offset_top = 280.0
 offset_right = 568.0
 offset_bottom = 303.0
 text = "FINISH!"
+label_settings = ExtResource("5_evluj")
 
 [node name="TextureRect" type="TextureRect" parent="Hud"]
 offset_left = 23.0
