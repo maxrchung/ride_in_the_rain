@@ -97,6 +97,7 @@ func _on_join_button_pressed():
 @rpc("call_local")
 func load_game():
 	get_tree().change_scene_to_file("game.tscn")
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _on_start_button_pressed():
 	load_game.rpc()
@@ -115,3 +116,4 @@ func _on_leave_button_pressed():
 @rpc
 func update_game(data):
 	get_tree().change_scene_to_file("game.tscn")
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
