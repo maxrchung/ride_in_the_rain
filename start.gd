@@ -43,13 +43,15 @@ func create_game():
 func update_players(new_players):
 	print("update_players ", new_players)
 	GlobalCrap.players = new_players
-	var list = GlobalCrap.players.map(map_player_you)
+	var list = []
+	for i in range(GlobalCrap.players.size()):
+		var player = GlobalCrap.players[i]
+		var key = i + 1
+		if multiplayer.get_unique_id() == player:
+			list.push_back(str(key) + " (You)")
+		else:
+			list.push_back(str(key))
 	$PlayersCount.text = "Players:\n" + "\n".join(list)
-
-func map_player_you(player):
-	if multiplayer.get_unique_id() == player:
-		return str(player) + " (You)"
-	return str(player)
 
 func _on_player_connected(id):
 	if multiplayer.is_server():
