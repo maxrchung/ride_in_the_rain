@@ -14,6 +14,9 @@ func _ready():
 	if multiplayer.is_server():
 		restart_game.rpc(Time.get_unix_time_from_system())
 
+func is_in_ending():
+	return $FinishTimer.time_left > 0 or $WinUi.visible or $LoseUi.visible
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if $StartTimer.time_left > 0:
@@ -60,12 +63,12 @@ func sync_start_time(time):
 func _on_end_area_body_entered(body):
 	print("End area collision")
 	if multiplayer.is_server():
-		win_game.rpc(Time.get_unix_time_from_system())
+		if !is_in_ending():
+			win_game.rpc(Time.get_unix_time_from_system())
 		
 @rpc("call_local")
 func win_game(time):
 	Sfx.cheer()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$FinishTimer.start(3.999)
 	$Hud/FinishLabel.show()
 	end_time = time
@@ -77,7 +80,6 @@ func win_game(time):
 func lose_game():
 	Sfx.game_over()
 	$Bicycle.crash()
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$LoseUi.show()
 	if multiplayer.is_server():
 		$EndArea/EndCollision.set_deferred("disabled", true)
@@ -121,7 +123,8 @@ func _on_finish_timer_timeout():
 	$WinUi.show()
 
 func _on_track_dev_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	print("CrashTime")
 	if multiplayer.is_server():
-		$Bicycle.crash()
-		lose_game.rpc()
+		if !is_in_ending():
+			print("CrashTime")
+			$Bicycle.crash()
+			lose_game.rpc()

@@ -46,7 +46,9 @@ func _process(delta):
 		get_node("player_model/AnimationPlayer").speed_scale = (current_force/max_force) * pedal_speed
 		rider.rotation.z = -deg_to_rad(current_lean)
 		return
-	
+		
+	if $/root/Game/TestMap/LoseUi.visible or $/root/Game/TestMap/WinUi.visible:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
 	input_vel.x = 0
 	if Input.is_action_just_pressed("change_control_scheme"):
