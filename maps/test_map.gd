@@ -40,7 +40,7 @@ func _process(delta):
 	else:
 		$Hud/TimeText.text = format_time(Time.get_unix_time_from_system() - start_time)
 
-	$Hud/SpeedText.text = str(int($Bicycle.speed)) + " km/h"
+	$Hud/SpeedText.text = str(int($Bicycle.speed))
 	var speed_abs = $Bicycle.speed / 30
 	$Hud/SpeedometerBg/SpeedometerArm.rotation_degrees = (speed_abs * (162)) - 87 
 
@@ -59,9 +59,10 @@ func _on_end_area_body_entered(body):
 	print("End area collision")
 	if multiplayer.is_server():
 		win_game.rpc(Time.get_unix_time_from_system())
-
+		
 @rpc("call_local")
 func win_game(time):
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$FinishTimer.start(3.999)
 	$Hud/FinishLabel.show()
 	end_time = time
@@ -71,6 +72,7 @@ func win_game(time):
 		
 @rpc("call_local")
 func lose_game():
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$LoseUi.show()
 	if multiplayer.is_server():
 		$EndArea/EndCollision.set_deferred("disabled", true)
@@ -108,3 +110,9 @@ func _on_start_timer_timeout():
 func _on_finish_timer_timeout():
 	$Hud/FinishLabel.hide()
 	$WinUi.show()
+
+func _on_track_dev_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	print("CrashTime")
+	if multiplayer.is_server():
+		$Bicycle.crash()
+		lose_game.rpc()

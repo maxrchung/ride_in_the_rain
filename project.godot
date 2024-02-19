@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="I-am-the-president"
+config/name="Ride in the Rain"
 run/main_scene="res://start.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"

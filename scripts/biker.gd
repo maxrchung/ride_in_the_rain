@@ -10,7 +10,6 @@ var rider
 @export var kb_lean_factor = 300
 @export var kb_speed = 20
 var input_vel = Vector2.ZERO
-var kb_input = false
 @export var mouse_lean = 5
 @export var mouse_speed = 1
 var mouse_vel = Vector2.ZERO
@@ -31,6 +30,7 @@ func _ready():
 	if multiplayer.get_unique_id() != peer_id:
 		rider.material = null
 	get_node("player_model/AnimationPlayer").play("spokesAction_001")
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -43,14 +43,19 @@ func _process(delta):
 		update_biker.rpc(current_lean, current_force)
 	
 	if multiplayer.get_unique_id() != peer_id:
+		get_node("player_model/AnimationPlayer").speed_scale = (current_force/max_force) * pedal_speed
+		rider.rotation.z = -deg_to_rad(current_lean)
 		return
 	
 	
 	input_vel.x = 0
 	if Input.is_action_just_pressed("change_control_scheme"):
-		kb_input = !kb_input
-	if(kb_input):
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		else:
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		
+	if(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE):
 		if Input.is_action_pressed("kb_right"):
 			input_vel.x -= kb_lean_factor
 		if Input.is_action_pressed("kb_left"):
@@ -66,7 +71,6 @@ func _process(delta):
 			else:
 				input_vel.y = 0
 	else:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 		#var mouse_pos = get_viewport().get_mouse_position()
 		#var mouse_vel = get_viewport().get_visible_rect().size/2 - mouse_pos
 		#Input.warp_mouse(get_viewport().get_visible_rect().size/2)

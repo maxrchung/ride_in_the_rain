@@ -55,20 +55,23 @@ placeholder_text = "IP Address"
 
 [node name="WaitingText" type="Label" parent="."]
 visible = false
-offset_left = 464.0
-offset_top = 47.0
-offset_right = 639.0
-offset_bottom = 70.0
-text = "Waiting..."
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -84.0
+offset_top = 23.0
+offset_right = 91.0
+offset_bottom = 88.0
+grow_horizontal = 2
+text = "Waiting for riders..."
 label_settings = ExtResource("7_l8gfs")
 
 [node name="PlayersCount" type="Label" parent="."]
 visible = false
-offset_left = 31.0
-offset_top = 26.0
-offset_right = 96.0
-offset_bottom = 49.0
-text = "Players: "
+offset_left = 525.0
+offset_top = 95.0
+offset_right = 640.0
+offset_bottom = 368.0
 label_settings = ExtResource("7_l8gfs")
 
 [connection signal="pressed" from="CreateButton" to="." method="_on_create_button_pressed"]

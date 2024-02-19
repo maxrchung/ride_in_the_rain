@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://6yl14rwg2u4j" path="res://indicator.png" id="7_7y5m3"]
 [ext_resource type="Texture2D" uid="uid://c75edv10pbfa6" path="res://assets/ui/speedometer_bg.png" id="9_833qe"]
 [ext_resource type="Texture2D" uid="uid://1gksp40cof8k" path="res://assets/ui/speedometer_arm.png" id="10_54bol"]
+[ext_resource type="PackedScene" uid="uid://xola47y16src" path="res://track_dev.tscn" id="13_qqrku"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sw86o"]
 emission_shape = 3
@@ -113,27 +114,39 @@ transform = Transform3D(1, 0, 0, 0, 0.92325, 0.384199, 0, -0.384199, 0.92325, 0,
 visible = false
 
 [node name="YouWonText" type="Label" parent="WinUi"]
-offset_left = 321.0
-offset_top = 160.0
-offset_right = 492.0
-offset_bottom = 183.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -140.0
+offset_top = 103.0
+offset_right = 149.0
+offset_bottom = 168.0
+grow_horizontal = 2
 text = "Hey you won congrats"
 label_settings = ExtResource("5_evluj")
 
 [node name="PlayAgainButton" type="Button" parent="WinUi"]
 visible = false
-offset_left = 320.0
-offset_top = 229.0
-offset_right = 407.0
-offset_bottom = 260.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -97.5
+offset_top = 178.0
+offset_right = -10.5
+offset_bottom = 219.0
+grow_horizontal = 2
 theme = ExtResource("5_ee383")
 text = "Play again"
 
 [node name="LeaveButton" type="Button" parent="WinUi"]
-offset_left = 462.0
-offset_top = 246.0
-offset_right = 515.0
-offset_bottom = 277.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 34.5
+offset_top = 183.0
+offset_right = 87.5
+offset_bottom = 216.0
+grow_horizontal = 2
 theme = ExtResource("5_ee383")
 text = "Leave"
 
@@ -141,32 +154,39 @@ text = "Leave"
 visible = false
 
 [node name="YouWonText" type="Label" parent="LoseUi"]
-offset_left = 431.0
-offset_top = 309.0
-offset_right = 602.0
-offset_bottom = 332.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 103.0
+offset_right = 90.0
+offset_bottom = 168.0
+grow_horizontal = 2
 text = "Lol you lost"
+label_settings = ExtResource("5_evluj")
 
 [node name="TryAgainButton" type="Button" parent="LoseUi"]
 visible = false
-offset_left = 417.0
-offset_top = 376.0
-offset_right = 504.0
-offset_bottom = 407.0
+offset_left = 478.5
+offset_top = 179.0
+offset_right = 565.5
+offset_bottom = 220.0
+theme = ExtResource("5_ee383")
 text = "Try again"
 
 [node name="LeaveButton" type="Button" parent="LoseUi"]
-offset_left = 551.0
-offset_top = 391.0
-offset_right = 604.0
-offset_bottom = 422.0
+offset_left = 610.5
+offset_top = 183.0
+offset_right = 663.5
+offset_bottom = 216.0
+theme = ExtResource("5_ee383")
 text = "Leave"
 
 [node name="StartPosition" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 46.684, 1.265, 42.851)
 
 [node name="EndArea" type="Area3D" parent="."]
-transform = Transform3D(-0.175298, 0, -0.984515, 0, 1, 0, 0.984515, 0, -0.175298, 78.2538, 1.265, -51.6823)
+transform = Transform3D(-0.175298, 0, -0.984515, 0, 1, 0, 0.984515, 0, -0.175298, 78.254, 100, -51.682)
 
 [node name="EndCollision" type="CollisionShape3D" parent="EndArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.46827, -2.81274, 38.5781)
@@ -178,23 +198,8 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 0.5, 0, 8.74228e-08, 0, -1, -1.2
 
 [node name="Hud" type="CanvasLayer" parent="."]
 
-[node name="SpeedLabel" type="Label" parent="Hud"]
-offset_left = 26.0
-offset_top = 57.0
-offset_right = 111.0
-offset_bottom = 108.0
-text = "Speed:"
-label_settings = ExtResource("5_evluj")
-
-[node name="SpeedText" type="Label" parent="Hud"]
-offset_left = 131.0
-offset_top = 67.0
-offset_right = 171.0
-offset_bottom = 116.0
-text = "0"
-label_settings = ExtResource("5_evluj")
-
 [node name="TimeLabel" type="Label" parent="Hud"]
+visible = false
 offset_left = 31.0
 offset_top = 8.0
 offset_right = 112.0
@@ -203,28 +208,36 @@ text = "Time:"
 label_settings = ExtResource("5_evluj")
 
 [node name="TimeText" type="Label" parent="Hud"]
-offset_left = 139.0
-offset_top = 17.0
-offset_right = 179.0
-offset_bottom = 66.0
-text = "0"
+offset_left = 925.0
+offset_top = 7.0
+offset_right = 1126.0
+offset_bottom = 72.0
+text = "00'00\"000"
 label_settings = ExtResource("5_evluj")
 
 [node name="StartLabel" type="Label" parent="Hud"]
 visible = false
-offset_left = 497.0
-offset_top = 249.0
-offset_right = 537.0
-offset_bottom = 272.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -15.5
+offset_top = 103.0
+offset_right = 24.5
+offset_bottom = 152.0
+grow_horizontal = 2
 text = "3"
 label_settings = ExtResource("5_evluj")
 
 [node name="FinishLabel" type="Label" parent="Hud"]
 visible = false
-offset_left = 516.0
-offset_top = 280.0
-offset_right = 568.0
-offset_bottom = 303.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.0
+offset_top = 103.0
+offset_right = 81.0
+offset_bottom = 168.0
+grow_horizontal = 2
 text = "FINISH!"
 label_settings = ExtResource("5_evluj")
 
@@ -292,6 +305,23 @@ scale = Vector2(0.75, 0.75)
 pivot_offset = Vector2(237.21, 376.585)
 texture = ExtResource("10_54bol")
 
+[node name="SpeedLabel" type="Label" parent="Hud"]
+offset_left = 1008.0
+offset_top = 565.0
+offset_right = 1093.0
+offset_bottom = 630.0
+text = "km/h"
+label_settings = ExtResource("5_evluj")
+
+[node name="SpeedText" type="Label" parent="Hud"]
+offset_left = 855.0
+offset_top = 582.0
+offset_right = 996.0
+offset_bottom = 631.0
+text = "0"
+label_settings = ExtResource("5_evluj")
+horizontal_alignment = 2
+
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 3.999
 one_shot = true
@@ -300,8 +330,8 @@ one_shot = true
 wait_time = 3.999
 one_shot = true
 
-[node name="track_dev" parent="." instance=ExtResource("6_pcrmm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.0864)
+[node name="track_dev" parent="." instance=ExtResource("13_qqrku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -19.086)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xjsex")
@@ -313,3 +343,4 @@ environment = SubResource("Environment_xjsex")
 [connection signal="body_entered" from="EndArea" to="." method="_on_end_area_body_entered"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="FinishTimer" to="." method="_on_finish_timer_timeout"]
+[connection signal="area_shape_entered" from="track_dev" to="." method="_on_track_dev_area_shape_entered"]
