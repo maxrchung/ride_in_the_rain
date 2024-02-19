@@ -113,27 +113,40 @@ transform = Transform3D(1, 0, 0, 0, 0.92325, 0.384199, 0, -0.384199, 0.92325, 0,
 visible = false
 
 [node name="YouWonText" type="Label" parent="WinUi"]
-offset_left = 321.0
-offset_top = 160.0
-offset_right = 492.0
-offset_bottom = 183.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -142.0
+offset_top = 104.0
+offset_right = 147.0
+offset_bottom = 169.0
+grow_horizontal = 2
 text = "Hey you won congrats"
 label_settings = ExtResource("5_evluj")
 
 [node name="PlayAgainButton" type="Button" parent="WinUi"]
 visible = false
-offset_left = 320.0
-offset_top = 229.0
-offset_right = 407.0
-offset_bottom = 260.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -105.0
+offset_top = 186.0
+offset_right = -18.0
+offset_bottom = 227.0
+grow_horizontal = 2
 theme = ExtResource("5_ee383")
+theme_override_font_sizes/font_size = 0
 text = "Play again"
 
 [node name="LeaveButton" type="Button" parent="WinUi"]
-offset_left = 462.0
-offset_top = 246.0
-offset_right = 515.0
-offset_bottom = 277.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 36.0
+offset_top = 192.0
+offset_right = 89.0
+offset_bottom = 225.0
+grow_horizontal = 2
 theme = ExtResource("5_ee383")
 text = "Leave"
 
@@ -141,25 +154,28 @@ text = "Leave"
 visible = false
 
 [node name="YouWonText" type="Label" parent="LoseUi"]
-offset_left = 431.0
-offset_top = 309.0
-offset_right = 602.0
-offset_bottom = 332.0
+offset_left = 495.0
+offset_top = 105.0
+offset_right = 666.0
+offset_bottom = 170.0
 text = "Lol you lost"
+label_settings = ExtResource("5_evluj")
 
 [node name="TryAgainButton" type="Button" parent="LoseUi"]
 visible = false
-offset_left = 417.0
-offset_top = 376.0
-offset_right = 504.0
-offset_bottom = 407.0
+offset_left = 471.0
+offset_top = 186.0
+offset_right = 558.0
+offset_bottom = 227.0
+theme = ExtResource("5_ee383")
 text = "Try again"
 
 [node name="LeaveButton" type="Button" parent="LoseUi"]
-offset_left = 551.0
-offset_top = 391.0
-offset_right = 604.0
-offset_bottom = 422.0
+offset_left = 613.0
+offset_top = 190.0
+offset_right = 666.0
+offset_bottom = 223.0
+theme = ExtResource("5_ee383")
 text = "Leave"
 
 [node name="StartPosition" type="Node3D" parent="."]
@@ -198,19 +214,27 @@ label_settings = ExtResource("5_evluj")
 
 [node name="StartLabel" type="Label" parent="Hud"]
 visible = false
-offset_left = 497.0
-offset_top = 249.0
-offset_right = 537.0
-offset_bottom = 272.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -8.0
+offset_top = 129.0
+offset_right = 11.0
+offset_bottom = 178.0
+grow_horizontal = 2
 text = "3"
 label_settings = ExtResource("5_evluj")
 
 [node name="FinishLabel" type="Label" parent="Hud"]
 visible = false
-offset_left = 516.0
-offset_top = 280.0
-offset_right = 568.0
-offset_bottom = 303.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -75.0
+offset_top = 129.0
+offset_right = 78.0
+offset_bottom = 194.0
+grow_horizontal = 2
 text = "FINISH!"
 label_settings = ExtResource("5_evluj")
 
