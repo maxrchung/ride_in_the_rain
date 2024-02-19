@@ -72,6 +72,7 @@ func win_game(time):
 		
 @rpc("call_local")
 func lose_game():
+	$Bicycle.crash()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	$LoseUi.show()
 	if multiplayer.is_server():

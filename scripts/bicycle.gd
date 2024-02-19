@@ -123,7 +123,7 @@ func add_bikers(amt):
 		biker_pos.z = -biker_offset * i
 		biker_instance.position = biker_pos
 		bikers.append(biker_instance)
-		
+
 func crash():
 	for biker in bikers:
 		biker.top_level = true
