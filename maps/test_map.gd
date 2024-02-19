@@ -17,6 +17,9 @@ func _process(delta):
 			$Hud/StartLabel.text = "Go!!"
 		else: 
 			$Hud/StartLabel.text = str(seconds)
+	else:
+		# LMAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO fk
+		$Bicycle.should_reset = false
 		
 	if multiplayer.is_server():
 		sync_start_time.rpc(start_time)
