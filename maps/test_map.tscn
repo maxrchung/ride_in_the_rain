@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bboibipxo6flu"]
+[gd_scene load_steps=27 format=3 uid="uid://bboibipxo6flu"]
 
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
@@ -15,6 +15,27 @@
 [ext_resource type="Texture2D" uid="uid://1gksp40cof8k" path="res://assets/ui/speedometer_arm.png" id="10_54bol"]
 [ext_resource type="Texture2D" uid="uid://bjbt6avfuuikd" path="res://assets/text/three.png" id="13_htrb5"]
 [ext_resource type="PackedScene" uid="uid://xola47y16src" path="res://track_dev.tscn" id="13_qqrku"]
+[ext_resource type="PackedScene" uid="uid://strvpwv4qfcc" path="res://post_process_vhs.tscn" id="16_0dkb4"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a0xp4"]
+panorama = ExtResource("7_4ydi2")
+
+[sub_resource type="Sky" id="Sky_dxivo"]
+sky_material = SubResource("PanoramaSkyMaterial_a0xp4")
+
+[sub_resource type="Environment" id="Environment_xjsex"]
+background_mode = 2
+background_energy_multiplier = 0.1
+sky = SubResource("Sky_dxivo")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 3
+ssr_enabled = true
+ssr_max_steps = 32
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.03
+volumetric_fog_albedo = Color(0.247059, 0.372549, 0.509804, 1)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sw86o"]
 emission_shape = 3
@@ -24,14 +45,14 @@ spread = 0.0
 initial_velocity_min = 8.0
 initial_velocity_max = 8.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2c04q"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0t3vf"]
 transparency = 3
 alpha_hash_scale = 1.0
 alpha_antialiasing_mode = 0
 albedo_color = Color(0.493745, 0.597054, 0.938991, 0.603922)
 
 [sub_resource type="SphereMesh" id="SphereMesh_qccq2"]
-material = SubResource("StandardMaterial3D_2c04q")
+material = SubResource("StandardMaterial3D_0t3vf")
 radius = 0.01
 height = 0.04
 radial_segments = 8
@@ -56,28 +77,11 @@ size = Vector3(33.6801, 41.8364, 1)
 shader = ExtResource("6_2phuh")
 shader_parameter/radius = 0.98
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a0xp4"]
-panorama = ExtResource("7_4ydi2")
-
-[sub_resource type="Sky" id="Sky_kgvh6"]
-sky_material = SubResource("PanoramaSkyMaterial_a0xp4")
-
-[sub_resource type="Environment" id="Environment_xjsex"]
-background_mode = 2
-background_energy_multiplier = 0.1
-sky = SubResource("Sky_kgvh6")
-ambient_light_source = 3
-reflected_light_source = 2
-tonemap_mode = 3
-ssr_enabled = true
-ssr_max_steps = 32
-glow_enabled = true
-volumetric_fog_enabled = true
-volumetric_fog_density = 0.03
-volumetric_fog_albedo = Color(0.247059, 0.372549, 0.509804, 1)
-
 [node name="TestMap" type="Node3D"]
 script = ExtResource("1_0a3d1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xjsex")
 
 [node name="Bicycle" parent="." instance=ExtResource("1_edykj")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 46.6844, 1.26458, 42.8507)
@@ -110,78 +114,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_1vtw1")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.92325, 0.384199, 0, -0.384199, 0.92325, 0, 33.8125, 0)
 
-[node name="WinUi" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="YouWonText" type="Label" parent="WinUi"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -140.0
-offset_top = 103.0
-offset_right = 149.0
-offset_bottom = 168.0
-grow_horizontal = 2
-text = "Hey you won congrats"
-label_settings = ExtResource("5_evluj")
-
-[node name="PlayAgainButton" type="Button" parent="WinUi"]
-visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -97.5
-offset_top = 178.0
-offset_right = -10.5
-offset_bottom = 219.0
-grow_horizontal = 2
-theme = ExtResource("5_ee383")
-text = "Play again"
-
-[node name="LeaveButton" type="Button" parent="WinUi"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 34.5
-offset_top = 183.0
-offset_right = 87.5
-offset_bottom = 216.0
-grow_horizontal = 2
-theme = ExtResource("5_ee383")
-text = "Leave"
-
-[node name="LoseUi" type="CanvasLayer" parent="."]
-visible = false
-
-[node name="YouWonText" type="Label" parent="LoseUi"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -81.0
-offset_top = 103.0
-offset_right = 90.0
-offset_bottom = 168.0
-grow_horizontal = 2
-text = "Lol you lost"
-label_settings = ExtResource("5_evluj")
-
-[node name="TryAgainButton" type="Button" parent="LoseUi"]
-visible = false
-offset_left = 478.5
-offset_top = 179.0
-offset_right = 565.5
-offset_bottom = 220.0
-theme = ExtResource("5_ee383")
-text = "Try again"
-
-[node name="LeaveButton" type="Button" parent="LoseUi"]
-offset_left = 610.5
-offset_top = 183.0
-offset_right = 663.5
-offset_bottom = 216.0
-theme = ExtResource("5_ee383")
-text = "Leave"
-
 [node name="StartPosition" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 46.684, 1.265, 42.851)
 
@@ -195,6 +127,9 @@ disabled = true
 
 [node name="goal" parent="EndArea" instance=ExtResource("6_k6a8r")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 0.5, 0, 8.74228e-08, 0, -1, -1.227, 0, 41.7151)
+
+[node name="track_dev" parent="." instance=ExtResource("13_qqrku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -19.086)
 
 [node name="Hud" type="CanvasLayer" parent="."]
 
@@ -331,6 +266,78 @@ offset_bottom = 682.0
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("13_htrb5")
 
+[node name="LoseUi" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="YouWonText" type="Label" parent="LoseUi"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 103.0
+offset_right = 90.0
+offset_bottom = 168.0
+grow_horizontal = 2
+text = "Lol you lost"
+label_settings = ExtResource("5_evluj")
+
+[node name="TryAgainButton" type="Button" parent="LoseUi"]
+visible = false
+offset_left = 478.5
+offset_top = 179.0
+offset_right = 565.5
+offset_bottom = 220.0
+theme = ExtResource("5_ee383")
+text = "Try again"
+
+[node name="LeaveButton" type="Button" parent="LoseUi"]
+offset_left = 610.5
+offset_top = 183.0
+offset_right = 663.5
+offset_bottom = 216.0
+theme = ExtResource("5_ee383")
+text = "Leave"
+
+[node name="WinUi" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="YouWonText" type="Label" parent="WinUi"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -140.0
+offset_top = 103.0
+offset_right = 149.0
+offset_bottom = 168.0
+grow_horizontal = 2
+text = "Hey you won congrats"
+label_settings = ExtResource("5_evluj")
+
+[node name="PlayAgainButton" type="Button" parent="WinUi"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -97.5
+offset_top = 178.0
+offset_right = -10.5
+offset_bottom = 219.0
+grow_horizontal = 2
+theme = ExtResource("5_ee383")
+text = "Play again"
+
+[node name="LeaveButton" type="Button" parent="WinUi"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 34.5
+offset_top = 183.0
+offset_right = 87.5
+offset_bottom = 216.0
+grow_horizontal = 2
+theme = ExtResource("5_ee383")
+text = "Leave"
+
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 3.999
 one_shot = true
@@ -339,17 +346,13 @@ one_shot = true
 wait_time = 3.999
 one_shot = true
 
-[node name="track_dev" parent="." instance=ExtResource("13_qqrku")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -19.086)
+[node name="PostProcess_VHS" parent="." instance=ExtResource("16_0dkb4")]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_xjsex")
-
-[connection signal="pressed" from="WinUi/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
-[connection signal="pressed" from="WinUi/LeaveButton" to="." method="_on_leave_button_pressed"]
+[connection signal="body_entered" from="EndArea" to="." method="_on_end_area_body_entered"]
+[connection signal="area_shape_entered" from="track_dev" to="." method="_on_track_dev_area_shape_entered"]
 [connection signal="pressed" from="LoseUi/TryAgainButton" to="." method="_on_try_again_button_pressed"]
 [connection signal="pressed" from="LoseUi/LeaveButton" to="." method="_on_leave_button_pressed"]
-[connection signal="body_entered" from="EndArea" to="." method="_on_end_area_body_entered"]
+[connection signal="pressed" from="WinUi/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="WinUi/LeaveButton" to="." method="_on_leave_button_pressed"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="FinishTimer" to="." method="_on_finish_timer_timeout"]
-[connection signal="area_shape_entered" from="track_dev" to="." method="_on_track_dev_area_shape_entered"]

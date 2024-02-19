@@ -31,7 +31,7 @@ void fragment() {
 	vec4 screen_color = texture(SCREEN_TEXTURE, uv);
 	vec3 normal = texture(NORMAL_TEXTURE, uv).rgb;
 	normal = normal * 2.0 - 1.0;
-	vec2 offset = 1.0 / VIEWPORT_SIZE;
+	vec2 offset = 1.5 / VIEWPORT_SIZE;
 
 	vec3 n = texture(NORMAL_TEXTURE, uv + vec2(0.0, -offset.y)).rgb;
 	vec3 s = texture(NORMAL_TEXTURE, uv + vec2(0.0, offset.y)).rgb;

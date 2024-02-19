@@ -1,15 +1,97 @@
-[gd_scene load_steps=8 format=3 uid="uid://0mueab7w8f21"]
+[gd_scene load_steps=19 format=3 uid="uid://0mueab7w8f21"]
 
 [ext_resource type="Script" path="res://start.gd" id="1_u02kx"]
+[ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="2_4wnmo"]
+[ext_resource type="Texture2D" uid="uid://cdqnmaxdommg5" path="res://assets/skybox/whipple_creek_regional_park_04_4k.exr" id="2_sdw6w"]
 [ext_resource type="Texture2D" uid="uid://cuv4gbgva6c1a" path="res://assets/ui/btn_create_game.png" id="2_x0q0c"]
 [ext_resource type="Texture2D" uid="uid://cip1sn2wflgem" path="res://assets/ui/btn_start_game.png" id="3_38bn3"]
 [ext_resource type="Texture2D" uid="uid://bhn7j2ssbui2d" path="res://assets/ui/btn_join_game.png" id="3_hde24"]
 [ext_resource type="Texture2D" uid="uid://c6kqt565xga07" path="res://assets/ui/btn_leave_game.png" id="4_5v2yp"]
 [ext_resource type="Theme" uid="uid://ckvowov5bcv6l" path="res://default_ui_theme.tres" id="6_vq6qa"]
 [ext_resource type="LabelSettings" uid="uid://cuiayxv1yxm7a" path="res://default_font.tres" id="7_l8gfs"]
+[ext_resource type="PackedScene" uid="uid://strvpwv4qfcc" path="res://post_process_vhs.tscn" id="8_ls4en"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_3f4bj"]
+panorama = ExtResource("2_sdw6w")
+
+[sub_resource type="Sky" id="Sky_kgvh6"]
+sky_material = SubResource("PanoramaSkyMaterial_3f4bj")
+
+[sub_resource type="Environment" id="Environment_85rmq"]
+background_mode = 2
+background_energy_multiplier = 0.1
+sky = SubResource("Sky_kgvh6")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 3
+ssr_enabled = true
+ssr_max_steps = 32
+glow_enabled = true
+volumetric_fog_density = 0.03
+volumetric_fog_albedo = Color(0.247059, 0.372549, 0.509804, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dpcdo"]
+emission_shape = 3
+emission_box_extents = Vector3(16, 0, 16)
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 8.0
+initial_velocity_max = 8.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2c04q"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+albedo_color = Color(0.493745, 0.597054, 0.938991, 0.603922)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xw5xj"]
+material = SubResource("StandardMaterial3D_2c04q")
+radius = 0.04
+height = 0.08
+radial_segments = 8
+rings = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_1e0b5"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5274e"]
+render_priority = 0
+shader = ExtResource("2_4wnmo")
+shader_parameter/edge_only = true
+shader_parameter/edge_threshold = 1.0
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/background_color = Color(1, 1, 1, 1)
 
 [node name="Game" type="CanvasLayer"]
 script = ExtResource("1_u02kx")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_85rmq")
+
+[node name="Camera" type="Camera3D" parent="."]
+current = true
+
+[node name="Rain" type="GPUParticles3D" parent="Camera"]
+transform = Transform3D(1, -1.18274e-08, -6.76452e-09, 1.36908e-09, 0.581186, -0.813772, 1.35561e-08, 0.813772, 0.581186, 0, 16, 8)
+layers = 2
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+amount = 5000
+lifetime = 2.0
+preprocess = 3.0
+fixed_fps = 15
+process_material = SubResource("ParticleProcessMaterial_dpcdo")
+draw_pass_1 = SubResource("SphereMesh_xw5xj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+cast_shadow = 0
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_1e0b5")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_5274e")
 
 [node name="CreateButton" type="TextureButton" parent="."]
 offset_left = 798.0
@@ -73,6 +155,8 @@ offset_top = 95.0
 offset_right = 640.0
 offset_bottom = 368.0
 label_settings = ExtResource("7_l8gfs")
+
+[node name="PostProcess_VHS" parent="." instance=ExtResource("8_ls4en")]
 
 [connection signal="pressed" from="CreateButton" to="." method="_on_create_button_pressed"]
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
