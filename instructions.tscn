@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvmas5ch5l50f"]
+
+[ext_resource type="Script" path="res://instructions.gd" id="1_kl63e"]
+[ext_resource type="Texture2D" uid="uid://js6n6pfo757k" path="res://instructions.png" id="1_mvjj4"]
+[ext_resource type="Texture2D" uid="uid://c6kqt565xga07" path="res://assets/ui/btn_leave_game.png" id="2_vsitt"]
+
+[node name="Instructions" type="CanvasLayer"]
+script = ExtResource("1_kl63e")
+
+[node name="InstructionsPng" type="TextureRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_mvjj4")
+expand_mode = 1
+
+[node name="LeaveButton" type="TextureButton" parent="."]
+offset_left = 29.0
+offset_top = 491.0
+offset_right = 541.0
+offset_bottom = 1003.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("2_vsitt")
+
+[connection signal="pressed" from="LeaveButton" to="." method="_on_leave_button_pressed"]

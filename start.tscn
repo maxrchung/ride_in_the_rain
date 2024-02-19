@@ -94,10 +94,10 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_5274e")
 
 [node name="CreateButton" type="TextureButton" parent="."]
-offset_left = 798.0
-offset_top = 356.0
-offset_right = 1310.0
-offset_bottom = 868.0
+offset_left = 760.0
+offset_top = 309.0
+offset_right = 1272.0
+offset_bottom = 821.0
 scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("2_x0q0c")
 
@@ -120,18 +120,18 @@ scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("4_5v2yp")
 
 [node name="JoinButton" type="TextureButton" parent="."]
-offset_left = 336.0
-offset_top = 356.0
-offset_right = 848.0
-offset_bottom = 868.0
+offset_left = 356.0
+offset_top = 310.0
+offset_right = 868.0
+offset_bottom = 822.0
 scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("3_hde24")
 
 [node name="IpInput" type="LineEdit" parent="."]
-offset_left = 95.0
-offset_top = 406.0
-offset_right = 305.0
-offset_bottom = 454.0
+offset_left = 118.0
+offset_top = 349.0
+offset_right = 328.0
+offset_bottom = 397.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource("6_vq6qa")
@@ -160,7 +160,23 @@ label_settings = ExtResource("7_l8gfs")
 
 [node name="PostProcess_VHS" parent="." instance=ExtResource("8_ls4en")]
 
+[node name="InstructionsButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -136.0
+offset_right = 51.0
+offset_bottom = -103.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("6_vq6qa")
+text = "Instructions"
+
 [connection signal="pressed" from="CreateButton" to="." method="_on_create_button_pressed"]
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="LeaveButton" to="." method="_on_leave_button_pressed"]
 [connection signal="pressed" from="JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="pressed" from="InstructionsButton" to="." method="_on_instructions_button_pressed"]

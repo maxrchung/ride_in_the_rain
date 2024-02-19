@@ -33,6 +33,7 @@ func create_game():
 	$CreateButton.hide()
 	$IpInput.hide()
 	$JoinButton.hide()
+	$InstructionsButton.hide()
 	$WaitingText.show()
 	$StartButton.show()
 	$LeaveButton.show()
@@ -70,6 +71,7 @@ func _on_connected_ok():
 	$IpInput.hide()
 	$JoinButton.hide()
 	$CreateButton.hide()
+	$InstructionsButton.hide()
 	$WaitingText.show()
 	$LeaveButton.show()
 	$PlayersCount.show()
@@ -85,6 +87,7 @@ func _on_server_disconnected():
 	$IpInput.show()
 	$JoinButton.show()
 	$CreateButton.show()
+	$InstructionsButton.show()
 	$WaitingText.hide()
 	$LeaveButton.hide()
 	$StartButton.hide()
@@ -114,6 +117,7 @@ func _on_leave_button_pressed():
 	$IpInput.show()
 	$JoinButton.show()
 	$CreateButton.show()
+	$InstructionsButton.show()
 	$WaitingText.hide()
 	$LeaveButton.hide()
 	$StartButton.hide()
@@ -123,3 +127,8 @@ func _on_leave_button_pressed():
 func update_game(data):
 	get_tree().change_scene_to_file("game.tscn")
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
+func _on_instructions_button_pressed():
+	Sfx.click_button()
+	get_tree().change_scene_to_file("instructions.tscn")
