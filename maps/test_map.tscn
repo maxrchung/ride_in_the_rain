@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
 [ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="3_a57eh"]
 [ext_resource type="Texture2D" uid="uid://djytkt442qiqt" path="res://icon.svg" id="4_8if12"]
-[ext_resource type="Theme" path="res://default_ui_theme.tres" id="5_ee383"]
-[ext_resource type="LabelSettings" path="res://default_font.tres" id="5_evluj"]
+[ext_resource type="Theme" uid="uid://ckvowov5bcv6l" path="res://default_ui_theme.tres" id="5_ee383"]
+[ext_resource type="LabelSettings" uid="uid://cuiayxv1yxm7a" path="res://default_font.tres" id="5_evluj"]
 [ext_resource type="Script" path="res://maps/minimap.gd" id="5_ey4rv"]
 [ext_resource type="Texture2D" uid="uid://cb8ixjsjmdt27" path="res://minimap.png" id="5_vosp2"]
 [ext_resource type="Shader" path="res://maps/minimap.gdshader" id="6_2phuh"]
@@ -113,27 +113,39 @@ transform = Transform3D(1, 0, 0, 0, 0.92325, 0.384199, 0, -0.384199, 0.92325, 0,
 visible = false
 
 [node name="YouWonText" type="Label" parent="WinUi"]
-offset_left = 321.0
-offset_top = 160.0
-offset_right = 492.0
-offset_bottom = 183.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -140.0
+offset_top = 103.0
+offset_right = 149.0
+offset_bottom = 168.0
+grow_horizontal = 2
 text = "Hey you won congrats"
 label_settings = ExtResource("5_evluj")
 
 [node name="PlayAgainButton" type="Button" parent="WinUi"]
 visible = false
-offset_left = 320.0
-offset_top = 229.0
-offset_right = 407.0
-offset_bottom = 260.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -97.5
+offset_top = 178.0
+offset_right = -10.5
+offset_bottom = 219.0
+grow_horizontal = 2
 theme = ExtResource("5_ee383")
 text = "Play again"
 
 [node name="LeaveButton" type="Button" parent="WinUi"]
-offset_left = 462.0
-offset_top = 246.0
-offset_right = 515.0
-offset_bottom = 277.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 34.5
+offset_top = 183.0
+offset_right = 87.5
+offset_bottom = 216.0
+grow_horizontal = 2
 theme = ExtResource("5_ee383")
 text = "Leave"
 
@@ -141,25 +153,32 @@ text = "Leave"
 visible = false
 
 [node name="YouWonText" type="Label" parent="LoseUi"]
-offset_left = 431.0
-offset_top = 309.0
-offset_right = 602.0
-offset_bottom = 332.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -81.0
+offset_top = 103.0
+offset_right = 90.0
+offset_bottom = 168.0
+grow_horizontal = 2
 text = "Lol you lost"
+label_settings = ExtResource("5_evluj")
 
 [node name="TryAgainButton" type="Button" parent="LoseUi"]
 visible = false
-offset_left = 417.0
-offset_top = 376.0
-offset_right = 504.0
-offset_bottom = 407.0
+offset_left = 478.5
+offset_top = 179.0
+offset_right = 565.5
+offset_bottom = 220.0
+theme = ExtResource("5_ee383")
 text = "Try again"
 
 [node name="LeaveButton" type="Button" parent="LoseUi"]
-offset_left = 551.0
-offset_top = 391.0
-offset_right = 604.0
-offset_bottom = 422.0
+offset_left = 610.5
+offset_top = 183.0
+offset_right = 663.5
+offset_bottom = 216.0
+theme = ExtResource("5_ee383")
 text = "Leave"
 
 [node name="StartPosition" type="Node3D" parent="."]
@@ -198,19 +217,27 @@ label_settings = ExtResource("5_evluj")
 
 [node name="StartLabel" type="Label" parent="Hud"]
 visible = false
-offset_left = 497.0
-offset_top = 249.0
-offset_right = 537.0
-offset_bottom = 272.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -15.5
+offset_top = 103.0
+offset_right = 24.5
+offset_bottom = 152.0
+grow_horizontal = 2
 text = "3"
 label_settings = ExtResource("5_evluj")
 
 [node name="FinishLabel" type="Label" parent="Hud"]
 visible = false
-offset_left = 516.0
-offset_top = 280.0
-offset_right = 568.0
-offset_bottom = 303.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.0
+offset_top = 103.0
+offset_right = 81.0
+offset_bottom = 168.0
+grow_horizontal = 2
 text = "FINISH!"
 label_settings = ExtResource("5_evluj")
 

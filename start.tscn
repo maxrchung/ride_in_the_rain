@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cip1sn2wflgem" path="res://assets/ui/btn_start_game.png" id="3_38bn3"]
 [ext_resource type="Texture2D" uid="uid://bhn7j2ssbui2d" path="res://assets/ui/btn_join_game.png" id="3_hde24"]
 [ext_resource type="Texture2D" uid="uid://c6kqt565xga07" path="res://assets/ui/btn_leave_game.png" id="4_5v2yp"]
-[ext_resource type="Theme" path="res://default_ui_theme.tres" id="6_vq6qa"]
-[ext_resource type="LabelSettings" path="res://default_font.tres" id="7_l8gfs"]
+[ext_resource type="Theme" uid="uid://ckvowov5bcv6l" path="res://default_ui_theme.tres" id="6_vq6qa"]
+[ext_resource type="LabelSettings" uid="uid://cuiayxv1yxm7a" path="res://default_font.tres" id="7_l8gfs"]
 
 [node name="Game" type="CanvasLayer"]
 script = ExtResource("1_u02kx")
