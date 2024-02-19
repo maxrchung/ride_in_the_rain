@@ -24,6 +24,7 @@ func _process(delta):
 	if Input.is_action_pressed("ui_cancel"):
 		multiplayer.multiplayer_peer = null
 		get_tree().change_scene_to_file("start.tscn")
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	elif multiplayer.is_server() and Input.is_action_pressed("test_f1"):
 		win_game.rpc(Time.get_unix_time_from_system())
 	elif multiplayer.is_server() and Input.is_action_pressed("test_f2"):
@@ -92,6 +93,7 @@ func _on_try_again_button_pressed():
 func _on_leave_button_pressed():
 	multiplayer.multiplayer_peer = null
 	get_tree().change_scene_to_file("start.tscn")
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 func _on_start_timer_timeout():
 	if multiplayer.is_server():

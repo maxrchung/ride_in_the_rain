@@ -42,6 +42,7 @@ func _on_server_disconnected():
 	multiplayer.multiplayer_peer = null
 	GlobalCrap.players = [1]
 	get_tree().change_scene_to_file("start.tscn")
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
