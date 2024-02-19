@@ -51,7 +51,7 @@ size = Vector3(33.6801, 41.8364, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dxl2j"]
 shader = ExtResource("6_2phuh")
-shader_parameter/radius = 1.0
+shader_parameter/radius = 0.98
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a0xp4"]
 panorama = ExtResource("7_4ydi2")
