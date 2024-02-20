@@ -21,8 +21,8 @@ var speed = 0
 # Whether or not to lerp bicycle updates, if set to true then updates will be
 # lerped at the cost of precise updates, and if set of false then updates will
 # always be as up to date as possible but potentially cause camera jitter,
-# default is true to look a bit better, there is a hot key to switch
-var is_lerp_update = true
+# default is false for performance, there is a hot key to switch
+var is_lerp_update = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
