@@ -18,6 +18,11 @@ var forward_vector = Vector3.ZERO
 # We display this on HUD, it's linear_velocity.length()
 var speed = 0
 
+# Whether or not to lerp bicycle updates, if set to true then updates will be
+# lerped at the cost of precise updates, and if set of false then updates will
+# always be as up to date as possible but potentially cause camera jitter,
+# default is true to look a bit better, there is a hot key to switch
+var is_lerp_update = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,6 +45,10 @@ func _integrate_forces(state):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if Input.is_action_just_pressed("toggle_lerp_update"):
+		is_lerp_update = !is_lerp_update
+		print("is_lerp_update changed to: ", is_lerp_update)
+	
 	if !multiplayer.is_server():
 		return
 	
@@ -76,8 +85,12 @@ func resync_bikers():
 @rpc
 func update_bicycle(new_position, new_basis, new_speed, delta):
 	# Lerp to get rid of jittering
-	position = position.lerp(new_position, delta * 3)
-	basis = Quaternion(basis).slerp(Quaternion(new_basis), delta * 3)
+	if is_lerp_update:
+		position = position.lerp(new_position, delta * 4)
+		basis = Quaternion(basis).slerp(Quaternion(new_basis), delta * 4)
+	else:
+		position = new_position
+		basis = new_basis
 	speed = new_speed
 
 func reset():
