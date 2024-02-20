@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
 [ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="3_a57eh"]
-[ext_resource type="Theme" uid="uid://ckvowov5bcv6l" path="res://default_ui_theme.tres" id="5_ee383"]
-[ext_resource type="LabelSettings" uid="uid://cuiayxv1yxm7a" path="res://default_font.tres" id="5_evluj"]
+[ext_resource type="Theme" path="res://default_ui_theme.tres" id="5_ee383"]
+[ext_resource type="LabelSettings" path="res://default_font.tres" id="5_evluj"]
 [ext_resource type="Script" path="res://maps/minimap.gd" id="5_ey4rv"]
 [ext_resource type="Texture2D" uid="uid://cb8ixjsjmdt27" path="res://minimap.png" id="5_vosp2"]
 [ext_resource type="Shader" path="res://maps/minimap.gdshader" id="6_2phuh"]
@@ -85,7 +85,7 @@ script = ExtResource("1_0a3d1")
 environment = SubResource("Environment_xjsex")
 
 [node name="Bicycle" parent="." instance=ExtResource("1_edykj")]
-transform = Transform3D(0.414916, 0, 0.90986, 0, 1, 0, -0.90986, 0, 0.414916, 76.4423, 14.3913, -125.888)
+transform = Transform3D(0.414916, 0, 0.90986, 0, 1, 0, -0.90986, 0, 0.414916, 67.4096, 18.7559, -91.4638)
 
 [node name="CameraTarget" type="Node3D" parent="Bicycle"]
 transform = Transform3D(-1, 6.82274e-08, -5.46604e-08, 0, 0.625243, 0.78043, 8.74228e-08, 0.78043, -0.625243, 0, 14, -9)
@@ -327,7 +327,7 @@ one_shot = true
 transform = Transform3D(-0.175367, 0, -0.984503, 0, 1, 0, 0.984503, 0, -0.175367, 78.254, -2.223, -51.682)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.414916, 0.709973, -0.569019, 8.9295e-08, 0.625392, 0.780311, 0.90986, 0.323763, -0.259485, 68.2536, 28.3913, -129.622)
+transform = Transform3D(0.650986, 0.592417, -0.474615, 0, 0.625243, 0.780431, 0.75909, -0.508049, 0.407024, 42.7595, 11.8769, -94.9751)
 script = ExtResource("16_sklxw")
 camera_target = NodePath("../Bicycle/CameraTarget")
 
