@@ -1,5 +1,8 @@
 extends Node
 
+# Load file early so there is no lag when hitting start game 
+var track = preload("res://maps/track_02_baked.tscn")
+
 const PORT = 7069
 const DEFAULT_SERVER_IP = "127.0.0.1"
 const MAX_CONNECTIONS = 64
