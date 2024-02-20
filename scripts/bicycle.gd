@@ -48,7 +48,7 @@ func _process(delta):
 		
 	if get_node("../StartTimer").time_left > 0:
 		# Tell others about new position so people but don't actually update it below
-		update_bicycle.rpc(position, rotation, current_velocity)
+		update_bicycle.rpc(position, basis, current_velocity, delta)
 		return
 		
 	forward_vector = get_global_transform().basis.z
@@ -59,24 +59,9 @@ func _process(delta):
 	for biker in bikers:
 		current_force += (biker.current_force/pow(bikers.size(),group_factor))
 		current_lean += biker.current_lean/bikers.size()
-	#if(current_force < 0):
-		#current_force = 0
-	#else:
-		#current_force -= (current_force * (current_velocity/max_velocity))
-	#if(current_acc < -100):
-		#current_acc = -100
-	#else:
-		#current_acc -= 10
-	#current_acc += current_force * delta
-	#current_velocity += current_acc * delta
-	#if(current_velocity < 0):
-		#current_velocity = 0
-	#position += current_velocity * forward_vector * delta * speedFactor
-	#rotation.y += deg_to_rad(current_lean * delta * (current_velocity/handling))
-	##current_velocity -= ((current_velocity * friction) + 10 + abs(current_lean)) * delta
-	
+
 	speed = linear_velocity.length()
-	update_bicycle.rpc(position, rotation, linear_velocity.length())
+	update_bicycle.rpc(position, basis, linear_velocity.length(), delta)
 	
 @rpc("call_local")
 func resync_bikers():
@@ -89,9 +74,10 @@ func resync_bikers():
 	add_bikers(playerCount)
 
 @rpc
-func update_bicycle(new_position, new_rotation, new_speed):
-	position = new_position
-	rotation = new_rotation
+func update_bicycle(new_position, new_basis, new_speed, delta):
+	# Lerp to get rid of jittering
+	position = position.lerp(new_position, delta * 3)
+	basis = Quaternion(basis).slerp(Quaternion(new_basis), delta * 3)
 	speed = new_speed
 
 func reset():

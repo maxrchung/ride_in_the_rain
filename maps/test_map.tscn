@@ -1,10 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://bboibipxo6flu"]
+[gd_scene load_steps=28 format=3 uid="uid://bboibipxo6flu"]
 
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
 [ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="3_a57eh"]
-[ext_resource type="Theme" path="res://default_ui_theme.tres" id="5_ee383"]
-[ext_resource type="LabelSettings" path="res://default_font.tres" id="5_evluj"]
+[ext_resource type="Theme" uid="uid://ckvowov5bcv6l" path="res://default_ui_theme.tres" id="5_ee383"]
+[ext_resource type="LabelSettings" uid="uid://cuiayxv1yxm7a" path="res://default_font.tres" id="5_evluj"]
 [ext_resource type="Script" path="res://maps/minimap.gd" id="5_ey4rv"]
 [ext_resource type="Texture2D" uid="uid://cb8ixjsjmdt27" path="res://minimap.png" id="5_vosp2"]
 [ext_resource type="Shader" path="res://maps/minimap.gdshader" id="6_2phuh"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bjbt6avfuuikd" path="res://assets/text/three.png" id="13_htrb5"]
 [ext_resource type="PackedScene" path="res://post_process_vhs.tscn" id="16_0dkb4"]
 [ext_resource type="PackedScene" uid="uid://ceiv57fci5exw" path="res://maps/track_02_baked.tscn" id="16_hspn3"]
+[ext_resource type="Script" path="res://maps/main_camera.gd" id="16_sklxw"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a0xp4"]
 panorama = ExtResource("7_4ydi2")
@@ -36,6 +37,13 @@ glow_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.03
 volumetric_fog_albedo = Color(0.247059, 0.372549, 0.509804, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hap21"]
+size = Vector3(12.6613, 10.1151, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dxl2j"]
+shader = ExtResource("6_2phuh")
+shader_parameter/radius = 0.98
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sw86o"]
 emission_shape = 3
@@ -70,13 +78,6 @@ shader_parameter/edge_threshold = 1.0
 shader_parameter/line_color = Color(1, 1, 1, 1)
 shader_parameter/background_color = Color(1, 1, 1, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_hap21"]
-size = Vector3(12.6613, 10.1151, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dxl2j"]
-shader = ExtResource("6_2phuh")
-shader_parameter/radius = 0.98
-
 [node name="TestMap" type="Node3D"]
 script = ExtResource("1_0a3d1")
 
@@ -86,30 +87,8 @@ environment = SubResource("Environment_xjsex")
 [node name="Bicycle" parent="." instance=ExtResource("1_edykj")]
 transform = Transform3D(0.414916, 0, 0.90986, 0, 1, 0, -0.90986, 0, 0.414916, 76.4423, 14.3913, -125.888)
 
-[node name="Camera3D" type="Camera3D" parent="Bicycle"]
-transform = Transform3D(-1, 1.04927e-07, 3.03398e-08, 8.9295e-08, 0.625392, 0.78031, 6.29014e-08, 0.78031, -0.625392, 0, 14, -9)
-current = true
-
-[node name="Rain" type="GPUParticles3D" parent="Bicycle/Camera3D"]
-transform = Transform3D(1, -1.18274e-08, -6.76452e-09, 1.36908e-09, 0.581186, -0.813772, 1.35561e-08, 0.813772, 0.581186, 1.52588e-05, 47.0939, -33.0374)
-layers = 2
-extra_cull_margin = 16384.0
-ignore_occlusion_culling = true
-amount = 25000
-lifetime = 2.0
-preprocess = 3.0
-fixed_fps = 15
-process_material = SubResource("ParticleProcessMaterial_sw86o")
-draw_pass_1 = SubResource("SphereMesh_qccq2")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Bicycle/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
-cast_shadow = 0
-extra_cull_margin = 16384.0
-ignore_occlusion_culling = true
-mesh = SubResource("QuadMesh_rxd2c")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("ShaderMaterial_1vtw1")
+[node name="CameraTarget" type="Node3D" parent="Bicycle"]
+transform = Transform3D(-1, 6.82274e-08, -5.46604e-08, 0, 0.625243, 0.78043, 8.74228e-08, 0.78043, -0.625243, 0, 14, -9)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.764778, 0.17013, -0.621426, 0.0304714, -0.972979, -0.228875, -0.643573, 0.156103, -0.749297, 0, 40.0824, 0)
@@ -346,6 +325,32 @@ one_shot = true
 
 [node name="track_02_baked" parent="." instance=ExtResource("16_hspn3")]
 transform = Transform3D(-0.175367, 0, -0.984503, 0, 1, 0, 0.984503, 0, -0.175367, 78.254, -2.223, -51.682)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.414916, 0.709973, -0.569019, 8.9295e-08, 0.625392, 0.780311, 0.90986, 0.323763, -0.259485, 68.2536, 28.3913, -129.622)
+script = ExtResource("16_sklxw")
+camera_target = NodePath("../Bicycle/CameraTarget")
+
+[node name="Rain" type="GPUParticles3D" parent="Camera3D"]
+transform = Transform3D(1, -1.18274e-08, -6.76452e-09, 1.36908e-09, 0.581186, -0.813772, 1.35561e-08, 0.813772, 0.581186, 1.52588e-05, 47.0939, -33.0374)
+layers = 2
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+amount = 25000
+lifetime = 2.0
+preprocess = 3.0
+fixed_fps = 15
+process_material = SubResource("ParticleProcessMaterial_sw86o")
+draw_pass_1 = SubResource("SphereMesh_qccq2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+cast_shadow = 0
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_rxd2c")
+skeleton = NodePath("../../Bicycle")
+surface_material_override/0 = SubResource("ShaderMaterial_1vtw1")
 
 [connection signal="area_shape_entered" from="EndArea" to="." method="_on_end_area_area_shape_entered"]
 [connection signal="body_entered" from="EndArea" to="." method="_on_end_area_body_entered"]
