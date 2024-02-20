@@ -3,12 +3,11 @@
 [ext_resource type="Script" path="res://maps/test_map.gd" id="1_0a3d1"]
 [ext_resource type="PackedScene" uid="uid://c7k5ww22arkk2" path="res://gameobjects/bicycle.tscn" id="1_edykj"]
 [ext_resource type="Shader" path="res://shaders/postprocess.gdshader" id="3_a57eh"]
-[ext_resource type="Theme" uid="uid://ckvowov5bcv6l" path="res://default_ui_theme.tres" id="5_ee383"]
-[ext_resource type="LabelSettings" uid="uid://cuiayxv1yxm7a" path="res://default_font.tres" id="5_evluj"]
+[ext_resource type="Theme" path="res://default_ui_theme.tres" id="5_ee383"]
+[ext_resource type="LabelSettings" path="res://default_font.tres" id="5_evluj"]
 [ext_resource type="Script" path="res://maps/minimap.gd" id="5_ey4rv"]
 [ext_resource type="Texture2D" uid="uid://cb8ixjsjmdt27" path="res://minimap.png" id="5_vosp2"]
 [ext_resource type="Shader" path="res://maps/minimap.gdshader" id="6_2phuh"]
-[ext_resource type="PackedScene" uid="uid://dltt3micujaoi" path="res://track02_unbaked.tscn" id="6_ht2i6"]
 [ext_resource type="PackedScene" uid="uid://dgqlbnpna5a33" path="res://assets/models/goal.glb" id="6_k6a8r"]
 [ext_resource type="Texture2D" uid="uid://cdqnmaxdommg5" path="res://assets/skybox/whipple_creek_regional_park_04_4k.exr" id="7_4ydi2"]
 [ext_resource type="Texture2D" uid="uid://6yl14rwg2u4j" path="res://indicator.png" id="7_7y5m3"]
@@ -16,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://1gksp40cof8k" path="res://assets/ui/speedometer_arm.png" id="10_54bol"]
 [ext_resource type="Texture2D" uid="uid://bjbt6avfuuikd" path="res://assets/text/three.png" id="13_htrb5"]
 [ext_resource type="PackedScene" path="res://post_process_vhs.tscn" id="16_0dkb4"]
+[ext_resource type="PackedScene" uid="uid://ceiv57fci5exw" path="res://maps/track_02_baked.tscn" id="16_hspn3"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a0xp4"]
 panorama = ExtResource("7_4ydi2")
@@ -112,14 +112,10 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("ShaderMaterial_1vtw1")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.982871, 0.0708058, -0.17015, 0.102648, -0.97711, 0.186333, -0.153062, -0.200607, -0.967641, 0, 33.8125, 0)
-visible = false
+transform = Transform3D(0.764778, 0.17013, -0.621426, 0.0304714, -0.972979, -0.228875, -0.643573, 0.156103, -0.749297, 0, 40.0824, 0)
 
 [node name="StartPosition" type="Node3D" parent="."]
 transform = Transform3D(-0.650986, 0, 0.75909, 0, 1, 0, -0.75909, 0, -0.650986, 49.5913, -2.12313, -100.834)
-
-[node name="track_02" parent="." instance=ExtResource("6_ht2i6")]
-transform = Transform3D(-0.175298, 0, -0.984516, 0, 1, 0, 0.984516, 0, -0.175298, 78.254, -2.2226, -51.682)
 
 [node name="EndArea" type="Area3D" parent="."]
 transform = Transform3D(0.734405, 0, 0.678711, 0, 1, 0, -0.678711, 0, 0.734405, 24.9118, -2.11258, 13.0803)
@@ -348,7 +344,9 @@ one_shot = true
 
 [node name="PostProcess_VHS" parent="." instance=ExtResource("16_0dkb4")]
 
-[connection signal="area_shape_entered" from="track_02" to="." method="_on_track_02_area_shape_entered"]
+[node name="track_02_baked" parent="." instance=ExtResource("16_hspn3")]
+transform = Transform3D(-0.175367, 0, -0.984503, 0, 1, 0, 0.984503, 0, -0.175367, 78.254, -2.223, -51.682)
+
 [connection signal="area_shape_entered" from="EndArea" to="." method="_on_end_area_area_shape_entered"]
 [connection signal="body_entered" from="EndArea" to="." method="_on_end_area_body_entered"]
 [connection signal="pressed" from="LoseUi/TryAgainButton" to="." method="_on_try_again_button_pressed"]
@@ -357,3 +355,4 @@ one_shot = true
 [connection signal="pressed" from="WinUi/LeaveButton" to="." method="_on_leave_button_pressed"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="FinishTimer" to="." method="_on_finish_timer_timeout"]
+[connection signal="area_shape_entered" from="track_02_baked" to="." method="_on_track_02_baked_area_shape_entered"]
