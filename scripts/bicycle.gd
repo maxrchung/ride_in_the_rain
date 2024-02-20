@@ -13,6 +13,7 @@ var current_lean = 0
 var current_dir = 0
 var biker_res = preload("res://gameobjects/biker.tscn")
 var forward_vector = Vector3.ZERO
+@export var group_factor = 0.8
 
 # We display this on HUD, it's linear_velocity.length()
 var speed = 0
@@ -56,7 +57,7 @@ func _process(delta):
 	current_lean = 0
 	current_force = 0
 	for biker in bikers:
-		current_force += (biker.current_force/bikers.size())
+		current_force += (biker.current_force/pow(bikers.size(),group_factor))
 		current_lean += biker.current_lean/bikers.size()
 	#if(current_force < 0):
 		#current_force = 0
