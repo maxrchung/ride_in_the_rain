@@ -2,13 +2,13 @@ Ride in the Rain is a 3D networked racing game made over a 3 day game jam using 
 
 ## Play
 
-Windows build can be downloaded in [GitHub releases](https://github.com/maxrchung/ride_in_the_rain/releases). Note you may have to explicitly trust the executable.
+Windows build can be downloaded in [GitHub releases](https://github.com/maxrchung/ride_in_the_rain/releases). You may have to explicitly trust the executable.
 
-If you have Godot, you can of course clone this repo and run this from source.
+If you have Godot, you can clone this repo and run from source.
 
 ## Port
 
-This game runs on port `7069`. You'll likely need to configure port forwarding on your router if you want to host the game.
+This game runs on port `7069`. If you're hosting, you'll likely need to configure port forwarding on your router so clients can connect to you.
 
 ## Video
 https://www.youtube.com/watch?v=GSHtXQcCOtM
