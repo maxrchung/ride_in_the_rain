@@ -8,7 +8,7 @@ If you have Godot, you can clone this repo and run from source.
 
 ## Port
 
-This game runs on port `7069`. If you're hosting, you'll likely need to configure port forwarding on your router so clients can connect to you.
+This game runs on port `7069`. If you're hosting, you may need to configure port forwarding on your router so clients can connect to you.
 
 ## Video
 https://www.youtube.com/watch?v=GSHtXQcCOtM
